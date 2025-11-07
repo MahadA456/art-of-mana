@@ -57,7 +57,7 @@ function OfferingsPage() {
     <Box
       sx={{
         width: '100%',
-        height: '100vh',
+        minHeight: '100vh', // Changed to minHeight to allow content expansion
         position: 'fixed',
         top: 0,
         left: 0,
@@ -65,12 +65,12 @@ function OfferingsPage() {
         bottom: 0,
         display: 'flex',
         flexDirection: 'column',
-        overflowX: 'hidden',
-        overflowY: 'auto',
+        overflowY: 'auto', // Enable vertical scrolling
         backgroundImage: `url(${offeringsBg})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
+        backgroundAttachment: 'fixed', // Parallax effect
         scrollbarWidth: 'none',
         msOverflowStyle: 'none',
         '&::-webkit-scrollbar': {
@@ -85,7 +85,7 @@ function OfferingsPage() {
           height: '100%',
           display: 'flex',
           flexDirection: 'column',
-          padding: { xs: '1.25rem 1.25rem', sm: '2rem 1.75rem', md: '2.5rem 2rem' },
+          padding: { xs: '1rem 1rem', sm: '1.75rem 1.5rem', md: '2.5rem 2rem' }, // Reduced padding for mobile
           overflow: 'visible',
           position: 'relative',
         }}
@@ -102,12 +102,12 @@ function OfferingsPage() {
               fontFamily: 'Calibri, sans-serif',
               fontWeight: 700,
               fontStyle: 'normal',
-              fontSize: { xs: '28px', sm: '36px', md: '40px' },
-              lineHeight: 1.1,
+              fontSize: { xs: '22px', sm: '30px', md: '40px' }, // Reduced for mobile
+              lineHeight: { xs: 1.2, md: 1.1 },
               letterSpacing: '0%',
               color: 'white',
               margin: 0,
-              marginBottom: { xs: '1rem', md: '1.25rem' },
+              marginBottom: { xs: '0.75rem', md: '1.25rem' },
               textAlign: 'left',
             }}
           >
@@ -119,14 +119,14 @@ function OfferingsPage() {
               fontFamily: 'Calibri, sans-serif',
               fontWeight: 400,
               fontStyle: 'normal',
-              fontSize: { xs: '14px', sm: '16px', md: '17px' },
-              lineHeight: 1.4,
+              fontSize: { xs: '12px', sm: '14px', md: '17px' }, // Reduced for mobile
+              lineHeight: { xs: 1.5, md: 1.4 },
               letterSpacing: '0%',
               color: 'white',
               margin: 0,
-              marginBottom: { xs: '1.75rem', md: '2rem' },
+              marginBottom: { xs: '1.25rem', md: '2rem' },
               textAlign: 'left',
-              maxWidth: '760px',
+              maxWidth: { xs: '100%', md: '760px' }, // Full width on mobile
             }}
           >
             You are a striking blend of art and nature, walking a unique experience in life we strive to meet your needs, expectations, budget and time If the standard offerings is not suitable, Talk to us!
@@ -138,10 +138,10 @@ function OfferingsPage() {
           sx={{
             display: 'grid',
             gridTemplateColumns: {
-              xs: '1fr',
-              sm: 'repeat(2, minmax(0, 1fr))',
+              xs: '1fr', // Single column on mobile
+              sm: 'repeat(2, minmax(0, 1fr))', // Two columns from sm upward
             },
-            gap: { xs: '1.25rem', sm: '1.5rem', md: '1.75rem' },
+            gap: { xs: '1rem', sm: '1.5rem', md: '1.75rem' }, // Reduced gap for mobile
             flex: 1,
             width: '100%',
             maxWidth: '1050px',
@@ -168,7 +168,7 @@ function OfferingsPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: section.delay }}
-              style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}
+              style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }} // Reduced gap for mobile
             >
               <Box
                 component="h2"
@@ -176,7 +176,7 @@ function OfferingsPage() {
                   fontFamily: 'Calibri, sans-serif',
                   fontWeight: 700,
                   fontStyle: 'normal',
-                  fontSize: { xs: '20px', sm: '22px', md: '24px' },
+                  fontSize: { xs: '18px', sm: '20px', md: '24px' }, // Reduced for mobile
                   lineHeight: 1.1,
                   letterSpacing: '0%',
                   color: 'white',
@@ -192,7 +192,7 @@ function OfferingsPage() {
                 sx={{
                   display: 'flex',
                   flexDirection: 'column',
-                  gap: { xs: '0.85rem', sm: '0.95rem', md: '1rem' },
+                  gap: { xs: '0.75rem', sm: '0.95rem', md: '1rem' }, // Reduced gap for mobile
                 }}
               >
                 {section.items.map((pkg, index) => (
@@ -202,16 +202,16 @@ function OfferingsPage() {
                     initial={{ opacity: 0, scale: 0.96 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.4, delay: 0.35 + index * 0.08 + sectionIndex * 0.12 }}
-                    whileHover={{ scale: 1.015 }}
+                    whileHover={{ scale: { xs: 1.01, md: 1.015 } }} // Reduced hover scale for mobile
                     sx={{
                       backgroundColor: '#121212',
                       borderRadius: '12px',
-                      padding: { xs: '14px 16px', md: '16px 18px' },
+                      padding: { xs: '12px 14px', md: '16px 18px' }, // Reduced padding for mobile
                       border: pkg.highlighted ? '1.25px solid #00d4aa' : '1.25px solid #2b2b2b',
                       display: 'flex',
                       flexDirection: 'column',
-                      gap: '8px',
-                      minHeight: { xs: 'auto', sm: '135px', md: '130px' },
+                      gap: '6px', // Reduced gap for mobile
+                      minHeight: { xs: '120px', sm: '135px', md: '130px' }, // Minimum height for touch targets
                       transition: 'all 0.25s ease',
                       '&:hover': {
                         boxShadow: '0 6px 16px rgba(0, 212, 170, 0.18)',
@@ -223,7 +223,7 @@ function OfferingsPage() {
                         display: 'flex',
                         justifyContent: 'space-between',
                         alignItems: 'center',
-                        gap: '0.5rem',
+                        gap: '0.4rem', // Reduced gap for mobile
                       }}
                     >
                       <Box
@@ -232,7 +232,7 @@ function OfferingsPage() {
                           fontFamily: 'Inter, sans-serif',
                           fontWeight: 500,
                           fontStyle: 'normal',
-                          fontSize: { xs: '18px', sm: '19px', md: '20px' },
+                          fontSize: { xs: '16px', sm: '18px', md: '20px' }, // Reduced for mobile
                           lineHeight: 1.2,
                           letterSpacing: '-0.01em',
                           color: 'white',
@@ -247,7 +247,7 @@ function OfferingsPage() {
                           fontFamily: 'Inter, sans-serif',
                           fontWeight: 500,
                           fontStyle: 'normal',
-                          fontSize: { xs: '18px', sm: '19px', md: '20px' },
+                          fontSize: { xs: '16px', sm: '18px', md: '20px' },
                           lineHeight: 1.2,
                           letterSpacing: '-0.01em',
                           color: '#f5f5f5',
@@ -260,32 +260,32 @@ function OfferingsPage() {
                       sx={{
                         display: 'flex',
                         flexDirection: 'column',
-                        gap: '8px',
+                        gap: '6px', // Reduced gap for mobile
                       }}
                     >
                       <Box
                         sx={{
                           display: 'flex',
                           alignItems: 'center',
-                          gap: '0.6rem',
+                          gap: '0.5rem', // Reduced gap for mobile
                         }}
                       >
-                      <Box
-                        component="img"
-                        src={clockIcon}
-                        alt="Clock icon"
-                        sx={{
-                          width: { xs: '18px', sm: '18px', md: '20px' },
-                          height: 'auto',
-                        }}
-                      />
+                        <Box
+                          component="img"
+                          src={clockIcon}
+                          alt="Clock icon"
+                          sx={{
+                            width: { xs: '16px', sm: '18px', md: '20px' }, // Reduced for mobile
+                            height: 'auto',
+                          }}
+                        />
                         <Box
                           component="span"
                           sx={{
                             fontFamily: 'Calibri, sans-serif',
                             fontWeight: 300,
                             fontStyle: 'normal',
-                            fontSize: { xs: '13px', sm: '14px', md: '15px' },
+                            fontSize: { xs: '12px', sm: '13px', md: '15px' }, // Reduced for mobile
                             lineHeight: 1.4,
                             letterSpacing: '0%',
                             color: '#e5e5e5',
@@ -298,25 +298,25 @@ function OfferingsPage() {
                         sx={{
                           display: 'flex',
                           alignItems: 'center',
-                          gap: '0.6rem',
+                          gap: '0.5rem', // Reduced gap for mobile
                         }}
                       >
-                      <Box
-                        component="img"
-                        src={chatIcon}
-                        alt="Chat icon"
-                        sx={{
-                          width: { xs: '18px', sm: '18px', md: '20px' },
-                          height: 'auto',
-                        }}
-                      />
+                        <Box
+                          component="img"
+                          src={chatIcon}
+                          alt="Chat icon"
+                          sx={{
+                            width: { xs: '16px', sm: '18px', md: '20px' }, // Reduced for mobile
+                            height: 'auto',
+                          }}
+                        />
                         <Box
                           component="span"
                           sx={{
                             fontFamily: 'Calibri, sans-serif',
                             fontWeight: 300,
                             fontStyle: 'normal',
-                            fontSize: { xs: '13px', sm: '14px', md: '15px' },
+                            fontSize: { xs: '12px', sm: '13px', md: '15px' }, // Reduced for mobile
                             lineHeight: 1.4,
                             letterSpacing: '0%',
                             color: '#e5e5e5',
@@ -332,11 +332,9 @@ function OfferingsPage() {
             </motion.div>
           ))}
         </Box>
-
       </Box>
     </Box>
   )
 }
 
 export default OfferingsPage
-

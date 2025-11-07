@@ -16,12 +16,7 @@ function LandingPage() {
     <Box
       sx={{
         width: '100vw',
-        height: '100vh',
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
+        minHeight: '100vh', // Changed to minHeight to allow content expansion
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -30,7 +25,6 @@ function LandingPage() {
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
-        overflow: 'hidden',
         boxSizing: 'border-box',
       }}
       role="main"
@@ -46,10 +40,10 @@ function LandingPage() {
           justifyContent: 'center',
           width: '100%',
           padding: {
-            xs: '1rem',
-            sm: '2rem',
-            md: '3rem',
-            lg: '4rem',
+            xs: '0.75rem', // Reduced padding for mobile
+            sm: '1.5rem',
+            md: '2rem',
+            lg: '3rem',
           },
           maxWidth: '100%',
         }}
@@ -61,18 +55,18 @@ function LandingPage() {
           alt="Round Icon"
           sx={{
             width: {
-              xs: '20vw', // Scales with viewport width
+              xs: '15vw', // Smaller for mobile
               sm: '18vw',
               md: '15vw',
               lg: '12vw',
             },
-            maxWidth: { xs: '100px', sm: '150px', md: '180px', lg: '200px' },
+            maxWidth: { xs: '80px', sm: '120px', md: '150px', lg: '180px' }, // Reduced maxWidth for mobile
             height: 'auto',
             marginBottom: {
-              xs: '0.5rem',
-              sm: '1rem',
-              md: '1.5rem',
-              lg: '2rem',
+              xs: '0.25rem', // Reduced margin for mobile
+              sm: '0.5rem',
+              md: '1rem',
+              lg: '1.5rem',
             },
             objectFit: 'contain',
           }}
@@ -85,12 +79,12 @@ function LandingPage() {
           alt="MANA OF ARTA Title"
           sx={{
             width: {
-              xs: '50vw',
+              xs: '40vw', // Smaller for mobile
               sm: '45vw',
               md: '40vw',
               lg: '35vw',
             },
-            maxWidth: { xs: '200px', sm: '280px', md: '360px', lg: '420px' },
+            maxWidth: { xs: '150px', sm: '220px', md: '300px', lg: '360px' }, // Reduced maxWidth for mobile
             height: 'auto',
             objectFit: 'contain',
           }}
@@ -105,15 +99,15 @@ function LandingPage() {
           justifyContent: 'center',
           alignItems: 'center',
           padding: {
-            xs: '1rem',
-            sm: '1.5rem',
-            md: '2rem',
-            lg: '2.5rem',
+            xs: '0.75rem', // Reduced padding for mobile
+            sm: '1rem',
+            md: '1.5rem',
+            lg: '2rem',
           },
           gap: {
-            xs: '0.5rem',
-            sm: '0.75rem',
-            md: '1rem',
+            xs: '0.25rem', // Reduced gap for mobile
+            sm: '0.5rem',
+            md: '0.75rem',
           },
         }}
       >
@@ -135,21 +129,21 @@ function LandingPage() {
             gridTemplateColumns: 'repeat(3, 1fr)',
             gridTemplateRows: 'repeat(3, 1fr)',
             gap: {
-              xs: '2px',
-              sm: '3px',
-              md: '4px',
+              xs: '1px', // Smaller gap for mobile
+              sm: '2px',
+              md: '3px',
             },
             width: {
-              xs: '20px',
-              sm: '24px',
-              md: '28px',
-              lg: '32px',
+              xs: '18px', // Smaller for mobile
+              sm: '22px',
+              md: '26px',
+              lg: '30px',
             },
             height: {
-              xs: '20px',
-              sm: '24px',
-              md: '28px',
-              lg: '32px',
+              xs: '18px', // Smaller for mobile
+              sm: '22px',
+              md: '26px',
+              lg: '30px',
             },
           }}
           whileHover={{
@@ -169,16 +163,16 @@ function LandingPage() {
                 width: '100%',
                 height: '100%',
                 minWidth: {
-                  xs: '5px',
-                  sm: '6px',
-                  md: '7px',
-                  lg: '8px',
+                  xs: '4px', // Smaller dots for mobile
+                  sm: '5px',
+                  md: '6px',
+                  lg: '7px',
                 },
                 minHeight: {
-                  xs: '5px',
-                  sm: '6px',
-                  md: '7px',
-                  lg: '8px',
+                  xs: '4px', // Smaller dots for mobile
+                  sm: '5px',
+                  md: '6px',
+                  lg: '7px',
                 },
               }}
               whileHover={{
@@ -203,16 +197,16 @@ function LandingPage() {
             fontWeight: 500,
             fontStyle: 'normal',
             fontSize: {
-              xs: '1rem', // 16px
-              sm: '1.25rem', // 20px
-              md: '1.5rem', // 24px
-              lg: '1.75rem', // 28px
+              xs: '0.875rem', // 14px for mobile
+              sm: '1rem', // 16px
+              md: '1.25rem', // 20px
+              lg: '1.5rem', // 24px
             },
             lineHeight: {
-              xs: '1.25rem',
-              sm: '1.5rem',
-              md: '1.75rem',
-              lg: '2rem',
+              xs: '1rem', // Adjusted for mobile
+              sm: '1.25rem',
+              md: '1.5rem',
+              lg: '1.75rem',
             },
             letterSpacing: 0,
             textTransform: 'capitalize',

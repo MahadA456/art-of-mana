@@ -91,7 +91,7 @@ function ContactPage() {
     <Box
       sx={{
         width: '100%',
-        height: '100vh',
+        minHeight: '100vh', // Changed to minHeight to allow content expansion
         position: 'fixed',
         top: 0,
         left: 0,
@@ -99,7 +99,7 @@ function ContactPage() {
         bottom: 0,
         display: 'flex',
         flexDirection: { xs: 'column', md: 'row' },
-        overflow: 'hidden',
+        overflowY: 'auto', // Enable vertical scrolling
         backgroundColor: '#000000',
       }}
     >
@@ -144,7 +144,7 @@ function ContactPage() {
           background: 'radial-gradient(circle at 25% 25%, rgba(0, 160, 100, 0.2) 0%, rgba(0, 0, 0, 0.95) 45%)',
           display: 'flex',
           flexDirection: 'column',
-          padding: { xs: '1.75rem 1.25rem', sm: '2.25rem 1.75rem', md: '2.75rem 2.25rem' },
+          padding: { xs: '1.25rem 1rem', sm: '1.75rem 1.5rem', md: '2.75rem 2.25rem' }, // Reduced padding for mobile
           overflow: 'hidden',
           position: 'relative',
           justifyContent: 'center',
@@ -159,8 +159,8 @@ function ContactPage() {
           style={{
             display: 'flex',
             flexDirection: 'column',
-            gap: '1.25rem',
-            maxWidth: '460px',
+            gap: '1rem', // Reduced gap for mobile
+            maxWidth: { xs: '100%', md: '460px' }, // Full width on mobile
             width: '100%',
           }}
         >
@@ -171,12 +171,12 @@ function ContactPage() {
               fontFamily: 'Calibri, sans-serif',
               fontWeight: 700,
               fontStyle: 'normal',
-              fontSize: { xs: '30px', sm: '36px', md: '40px' },
-              lineHeight: 1.15,
+              fontSize: { xs: '24px', sm: '30px', md: '40px' }, // Reduced for mobile
+              lineHeight: { xs: 1.2, md: 1.15 },
               letterSpacing: '0%',
               color: 'white',
               margin: 0,
-              marginBottom: '0.75rem',
+              marginBottom: { xs: '0.5rem', md: '0.75rem' }, // Reduced for mobile
               textAlign: 'left',
             }}
           >
@@ -188,8 +188,8 @@ function ContactPage() {
             sx={{
               display: 'flex',
               flexDirection: 'column',
-              gap: '0.35rem',
-              marginBottom: '1.5rem',
+              gap: '0.25rem', // Reduced gap for mobile
+              marginBottom: { xs: '1rem', md: '1.5rem' }, // Reduced for mobile
             }}
           >
             <Box
@@ -198,8 +198,8 @@ function ContactPage() {
                 fontFamily: 'Calibri, sans-serif',
                 fontWeight: 400,
                 fontStyle: 'normal',
-                fontSize: { xs: '15px', sm: '17px', md: '18px' },
-                lineHeight: 1.35,
+                fontSize: { xs: '13px', sm: '15px', md: '18px' }, // Reduced for mobile
+                lineHeight: { xs: 1.4, md: 1.35 },
                 letterSpacing: '0%',
                 color: '#4CAF50',
                 margin: 0,
@@ -214,8 +214,8 @@ function ContactPage() {
                 fontFamily: 'Calibri, sans-serif',
                 fontWeight: 400,
                 fontStyle: 'normal',
-                fontSize: { xs: '15px', sm: '17px', md: '18px' },
-                lineHeight: 1.35,
+                fontSize: { xs: '13px', sm: '15px', md: '18px' },
+                lineHeight: { xs: 1.4, md: 1.35 },
                 letterSpacing: '0%',
                 color: '#4CAF50',
                 margin: 0,
@@ -233,6 +233,7 @@ function ContactPage() {
               sx={{
                 backgroundColor: message.type === 'success' ? '#4CAF50' : '#f44336',
                 color: 'white',
+                fontSize: { xs: '12px', md: '14px' }, // Reduced for mobile
                 '& .MuiAlert-icon': {
                   color: 'white',
                 },
@@ -255,6 +256,7 @@ function ContactPage() {
                 backgroundColor: '#1a1a1a',
                 borderRadius: '8px',
                 color: 'white',
+                minHeight: { xs: '48px', md: '56px' }, // Increased for touch
                 '& fieldset': {
                   borderColor: '#333',
                 },
@@ -269,6 +271,7 @@ function ContactPage() {
                   opacity: 0.7,
                 },
               },
+              maxWidth: '100%', // Full width on mobile
             }}
           />
           <TextField
@@ -284,6 +287,7 @@ function ContactPage() {
                 backgroundColor: '#1a1a1a',
                 borderRadius: '8px',
                 color: 'white',
+                minHeight: { xs: '48px', md: '56px' },
                 '& fieldset': {
                   borderColor: '#333',
                 },
@@ -298,6 +302,7 @@ function ContactPage() {
                   opacity: 0.7,
                 },
               },
+              maxWidth: '100%',
             }}
           />
           <TextField
@@ -313,6 +318,7 @@ function ContactPage() {
                 backgroundColor: '#1a1a1a',
                 borderRadius: '8px',
                 color: 'white',
+                minHeight: { xs: '48px', md: '56px' },
                 '& fieldset': {
                   borderColor: '#333',
                 },
@@ -327,6 +333,7 @@ function ContactPage() {
                   opacity: 0.7,
                 },
               },
+              maxWidth: '100%',
             }}
           />
 
@@ -343,25 +350,24 @@ function ContactPage() {
               color: 'white',
               border: 'none',
               borderRadius: '8px',
-              padding: '0.85rem 1.75rem',
-              fontSize: '16px',
+              padding: { xs: '0.75rem 1.5rem', md: '0.85rem 1.75rem' }, // Reduced for mobile
+              fontSize: { xs: '14px', md: '16px' }, // Reduced for mobile
               fontWeight: 600,
               fontFamily: 'Calibri, sans-serif',
               textTransform: 'uppercase',
               letterSpacing: '2px',
               cursor: loading ? 'not-allowed' : 'pointer',
-              marginTop: '0.5rem',
+              marginTop: { xs: '0.25rem', md: '0.5rem' }, // Reduced for mobile
+              minHeight: { xs: '44px', md: '48px' }, // Increased for touch
               opacity: loading ? 0.7 : 1,
             }}
           >
             {loading ? 'SENDING...' : 'SUBMIT'}
           </motion.button>
         </motion.form>
-
       </Box>
     </Box>
   )
 }
 
 export default ContactPage
-

@@ -29,29 +29,18 @@ function MenuPage() {
     } else if (item === 'Contact') {
       navigate('/contact')
     }
-    // Add other navigation cases here as needed
   }
 
   return (
     <Box
       sx={{
         width: '100%',
-        height: '100vh',
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
+        minHeight: '100vh', // Changed to minHeight to allow content expansion
         display: 'flex',
         backgroundImage: `url(${backMana})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
-        overflow: 'hidden',
-        opacity: 1,
-        borderWidth: '1px',
-        borderStyle: 'solid',
-        borderColor: 'transparent',
         boxSizing: 'border-box',
       }}
     >
@@ -62,13 +51,17 @@ function MenuPage() {
         transition={{ type: 'spring', damping: 25, stiffness: 200 }}
         style={{
           height: '100%',
-          width: 'min(300px, 82vw)',
+          width: { xs: 'min(200px, 70vw)', sm: 'min(250px, 75vw)', md: 'min(300px, 82vw)' }, // Smaller width for mobile
           backgroundColor: 'rgba(0, 0, 0, 0.88)',
           backdropFilter: 'blur(10px)',
-          padding: 'clamp(1.5rem, 5vw, 2.25rem) clamp(1rem, 4vw, 1.6rem)',
+          padding: {
+            xs: 'clamp(1rem, 4vw, 1.5rem) clamp(0.75rem, 3vw, 1rem)', // Reduced padding for mobile
+            sm: 'clamp(1.25rem, 4.5vw, 1.75rem) clamp(0.9rem, 3.5vw, 1.25rem)',
+            md: 'clamp(1.5rem, 5vw, 2.25rem) clamp(1rem, 4vw, 1.6rem)',
+          },
           display: 'flex',
           flexDirection: 'column',
-          gap: 'clamp(1rem, 3.5vw, 1.5rem)',
+          gap: { xs: 'clamp(0.75rem, 2.5vw, 1rem)', sm: 'clamp(1rem, 3vw, 1.25rem)', md: 'clamp(1rem, 3.5vw, 1.5rem)' }, // Reduced gap for mobile
         }}
       >
         {menuItems.map((item, index) => (
@@ -83,7 +76,7 @@ function MenuPage() {
               alignItems: 'center',
               justifyContent: 'space-between',
               cursor: 'pointer',
-              padding: '0.45rem 0',
+              padding: { xs: '0.3rem 0', sm: '0.4rem 0', md: '0.45rem 0' }, // Reduced padding for mobile
             }}
             whileHover={{ x: 10 }}
           >
@@ -92,8 +85,8 @@ function MenuPage() {
                 fontFamily: 'Calibri, sans-serif',
                 fontWeight: 500,
                 fontStyle: 'normal',
-                fontSize: 'clamp(1.35rem, 4vw, 1.85rem)',
-                lineHeight: 1.1,
+                fontSize: { xs: 'clamp(1rem, 3.5vw, 1.25rem)', sm: 'clamp(1.15rem, 3.8vw, 1.5rem)', md: 'clamp(1.35rem, 4vw, 1.85rem)' }, // Smaller font for mobile
+                lineHeight: 1.2, // Adjusted for readability
                 letterSpacing: '0%',
                 textTransform: 'capitalize',
                 color: 'white',
@@ -102,12 +95,12 @@ function MenuPage() {
               {item}
             </span>
             <motion.svg
-              width="16"
-              height="16"
+              width="14" // Smaller SVG for mobile
+              height="14"
               viewBox="0 0 16 16"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              style={{ marginLeft: 'clamp(0.5rem, 2.5vw, 1rem)' }}
+              style={{ marginLeft: { xs: 'clamp(0.3rem, 2vw, 0.5rem)', sm: 'clamp(0.4rem, 2.3vw, 0.75rem)', md: 'clamp(0.5rem, 2.5vw, 1rem)' } }} // Reduced margin for mobile
               whileHover={{ x: 5 }}
             >
               <path
@@ -125,7 +118,7 @@ function MenuPage() {
       {/* Close Button - 9 Dots in bottom center */}
       <Box
         sx={{
-          position: 'fixed',
+          position: 'absolute', // Changed to absolute to stay within parent
           bottom: 0,
           left: '50%',
           transform: 'translateX(-50%)',
@@ -133,8 +126,8 @@ function MenuPage() {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          padding: { xs: '1.25rem 0.75rem', sm: '1.8rem 1.25rem', md: '2.25rem' },
-          gap: { xs: '0.5rem', sm: '0.75rem', md: '1rem' },
+          padding: { xs: '0.75rem', sm: '1rem', md: '1.5rem' }, // Reduced padding for mobile
+          gap: { xs: '0.25rem', sm: '0.5rem', md: '0.75rem' }, // Reduced gap for mobile
         }}
       >
         <Box
@@ -145,9 +138,9 @@ function MenuPage() {
             display: 'grid',
             gridTemplateColumns: 'repeat(3, 1fr)',
             gridTemplateRows: 'repeat(3, 1fr)',
-            gap: { xs: '2px', sm: '3px', md: '4px' },
-            width: { xs: '24px', sm: '28px', md: '32px' },
-            height: { xs: '24px', sm: '28px', md: '32px' },
+            gap: { xs: '1px', sm: '2px', md: '3px' }, // Smaller gap for mobile
+            width: { xs: '20px', sm: '24px', md: '28px' }, // Smaller size for mobile
+            height: { xs: '20px', sm: '24px', md: '28px' },
           }}
           whileHover={{
             scale: 1.2,
@@ -165,8 +158,8 @@ function MenuPage() {
                 borderRadius: '50%',
                 width: '100%',
                 height: '100%',
-                minWidth: { xs: '6px', sm: '7px', md: '8px' },
-                minHeight: { xs: '6px', sm: '7px', md: '8px' },
+                minWidth: { xs: '5px', sm: '6px', md: '7px' }, // Smaller dots for mobile
+                minHeight: { xs: '5px', sm: '6px', md: '7px' },
               }}
               whileHover={{
                 scale: 1.3,
@@ -187,8 +180,8 @@ function MenuPage() {
             fontFamily: 'Poppins, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif',
             fontWeight: 500,
             fontStyle: 'normal',
-            fontSize: 'clamp(1.05rem, 3.6vw, 1.4rem)',
-            lineHeight: 1.2,
+            fontSize: { xs: 'clamp(0.875rem, 3vw, 1rem)', sm: 'clamp(0.95rem, 3.3vw, 1.2rem)', md: 'clamp(1.05rem, 3.6vw, 1.4rem)' }, // Smaller font for mobile
+            lineHeight: 1.3, // Adjusted for readability
             letterSpacing: 0,
             textTransform: 'capitalize',
           }}
@@ -201,4 +194,3 @@ function MenuPage() {
 }
 
 export default MenuPage
-

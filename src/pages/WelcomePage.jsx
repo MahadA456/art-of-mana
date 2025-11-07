@@ -38,6 +38,8 @@ function WelcomePage() {
           zIndex: 0,
         },
       }}
+      style={{ backgroundImage: `url(${welcomeBg})` }} // Repeated for clarity
+      loading="lazy" // Added for faster initial page load
     >
       {/* Main Content - Bottom Aligned */}
       <Box
@@ -188,10 +190,8 @@ function WelcomePage() {
         </Motion.button>
         </div>
       </Box>
-
     </Box>
   )
 }
 
 export default WelcomePage
-
