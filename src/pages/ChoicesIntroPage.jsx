@@ -11,12 +11,17 @@ function ChoicesIntroPage() {
     <Box
       sx={{
         width: '100vw',
-        minHeight: '100vh',
+        height: '100vh',
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
         display: 'flex',
         flexDirection: { xs: 'column', md: 'row' },
         margin: 0,
         padding: 0,
-        overflow: 'hidden',
+        overflowY: 'auto',
         boxSizing: 'border-box',
       }}
     >

@@ -6,8 +6,8 @@ function WelcomePage() {
   return (
     <Box
       sx={{
-        width: '100%',
-        height: '100%',
+        width: '100vw',
+        height: '100vh',
         position: 'fixed',
         top: 0,
         left: 0,
@@ -21,12 +21,14 @@ function WelcomePage() {
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
-        overflow: 'hidden',
+        overflowY: 'auto',
         opacity: 1,
         borderWidth: '1px',
         borderStyle: 'solid',
         borderColor: 'transparent',
         boxSizing: 'border-box',
+        margin: 0,
+        padding: 0,
         '&::before': {
           content: '""',
           position: 'absolute',

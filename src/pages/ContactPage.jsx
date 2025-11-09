@@ -90,8 +90,8 @@ function ContactPage() {
   return (
     <Box
       sx={{
-        width: '100%',
-        minHeight: '100vh', // Changed to minHeight to allow content expansion
+        width: '100vw',
+        height: '100vh',
         position: 'fixed',
         top: 0,
         left: 0,
@@ -101,6 +101,9 @@ function ContactPage() {
         flexDirection: { xs: 'column', md: 'row' },
         overflowY: 'auto', // Enable vertical scrolling
         backgroundColor: '#000000',
+        margin: 0,
+        padding: 0,
+        boxSizing: 'border-box',
       }}
     >
       {/* Left Section - Image */}
@@ -116,6 +119,7 @@ function ContactPage() {
           component="img"
           src={girlImage}
           alt="Contact"
+          loading="lazy"
           sx={{
             width: '100%',
             height: '100%',

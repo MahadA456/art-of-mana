@@ -56,8 +56,8 @@ function OfferingsPage() {
   return (
     <Box
       sx={{
-        width: '100%',
-        minHeight: '100vh', // Changed to minHeight to allow content expansion
+        width: '100vw',
+        height: '100vh',
         position: 'fixed',
         top: 0,
         left: 0,
@@ -73,6 +73,9 @@ function OfferingsPage() {
         backgroundAttachment: 'fixed', // Parallax effect
         scrollbarWidth: 'none',
         msOverflowStyle: 'none',
+        margin: 0,
+        padding: 0,
+        boxSizing: 'border-box',
         '&::-webkit-scrollbar': {
           display: 'none',
         },
@@ -274,6 +277,7 @@ function OfferingsPage() {
                           component="img"
                           src={clockIcon}
                           alt="Clock icon"
+                          loading="lazy"
                           sx={{
                             width: { xs: '16px', sm: '18px', md: '20px' }, // Reduced for mobile
                             height: 'auto',
@@ -305,6 +309,7 @@ function OfferingsPage() {
                           component="img"
                           src={chatIcon}
                           alt="Chat icon"
+                          loading="lazy"
                           sx={{
                             width: { xs: '16px', sm: '18px', md: '20px' }, // Reduced for mobile
                             height: 'auto',

@@ -53,6 +53,7 @@ function App() {
               component="img"
               src={roundIcon}
               alt="Menu"
+              loading="lazy"
               sx={{
                 width: { xs: '42px', sm: '48px' },
                 height: 'auto',

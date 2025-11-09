@@ -34,14 +34,22 @@ function MenuPage() {
   return (
     <Box
       sx={{
-        width: '100%',
-        minHeight: '100vh', // Changed to minHeight to allow content expansion
+        width: '100vw',
+        height: '100vh',
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
         display: 'flex',
         backgroundImage: `url(${backMana})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
         boxSizing: 'border-box',
+        overflow: 'hidden',
+        margin: 0,
+        padding: 0,
       }}
     >
       {/* Sidebar */}
@@ -49,20 +57,7 @@ function MenuPage() {
         initial={{ x: -300 }}
         animate={{ x: 0 }}
         transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-        style={{
-          height: '100%',
-          width: { xs: 'min(200px, 70vw)', sm: 'min(250px, 75vw)', md: 'min(300px, 82vw)' }, // Smaller width for mobile
-          backgroundColor: 'rgba(0, 0, 0, 0.88)',
-          backdropFilter: 'blur(10px)',
-          padding: {
-            xs: 'clamp(1rem, 4vw, 1.5rem) clamp(0.75rem, 3vw, 1rem)', // Reduced padding for mobile
-            sm: 'clamp(1.25rem, 4.5vw, 1.75rem) clamp(0.9rem, 3.5vw, 1.25rem)',
-            md: 'clamp(1.5rem, 5vw, 2.25rem) clamp(1rem, 4vw, 1.6rem)',
-          },
-          display: 'flex',
-          flexDirection: 'column',
-          gap: { xs: 'clamp(0.75rem, 2.5vw, 1rem)', sm: 'clamp(1rem, 3vw, 1.25rem)', md: 'clamp(1rem, 3.5vw, 1.5rem)' }, // Reduced gap for mobile
-        }}
+        className="h-full w-[22%] min-w-[200px] max-w-[280px] bg-[#0f0f0f] border-r border-[#2a2a2a] flex flex-col py-10 px-6 md:px-8"
       >
         {menuItems.map((item, index) => (
           <motion.div
@@ -71,46 +66,13 @@ function MenuPage() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: index * 0.1, duration: 0.3 }}
             onClick={() => handleMenuItemClick(item)}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              cursor: 'pointer',
-              padding: { xs: '0.3rem 0', sm: '0.4rem 0', md: '0.45rem 0' }, // Reduced padding for mobile
-            }}
-            whileHover={{ x: 10 }}
+            className="flex items-center justify-between cursor-pointer py-5 group"
+            whileHover={{ x: 5 }}
           >
-            <span
-              style={{
-                fontFamily: 'Calibri, sans-serif',
-                fontWeight: 500,
-                fontStyle: 'normal',
-                fontSize: { xs: 'clamp(1rem, 3.5vw, 1.25rem)', sm: 'clamp(1.15rem, 3.8vw, 1.5rem)', md: 'clamp(1.35rem, 4vw, 1.85rem)' }, // Smaller font for mobile
-                lineHeight: 1.2, // Adjusted for readability
-                letterSpacing: '0%',
-                textTransform: 'capitalize',
-                color: 'white',
-              }}
-            >
+            <span className="text-white text-base md:text-lg font-normal font-sans capitalize tracking-normal text-left">
               {item}
             </span>
-            <motion.svg
-              width="14" // Smaller SVG for mobile
-              height="14"
-              viewBox="0 0 16 16"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              style={{ marginLeft: { xs: 'clamp(0.3rem, 2vw, 0.5rem)', sm: 'clamp(0.4rem, 2.3vw, 0.75rem)', md: 'clamp(0.5rem, 2.5vw, 1rem)' } }} // Reduced margin for mobile
-              whileHover={{ x: 5 }}
-            >
-              <path
-                d="M6 12L10 8L6 4"
-                stroke="white"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </motion.svg>
+            <span className="text-white text-lg md:text-xl ml-2">></span>
           </motion.div>
         ))}
       </motion.div>

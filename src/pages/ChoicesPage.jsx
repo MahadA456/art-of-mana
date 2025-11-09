@@ -18,7 +18,7 @@ function ChoicesPage() {
         bottom: 0,
         display: 'flex',
         flexDirection: { xs: 'column', md: 'row' },
-        overflow: 'hidden',
+        overflowY: 'auto',
         margin: 0,
         padding: 0,
         boxSizing: 'border-box',
@@ -43,6 +43,7 @@ function ChoicesPage() {
           component="img"
           src={choiceImage}
           alt="Choices"
+          loading="lazy"
           sx={{
             width: '100%',
             height: '100%',
@@ -308,6 +309,7 @@ function ChoicesPage() {
               component="img"
               src={arrowIcon}
               alt="Back"
+              loading="lazy"
               sx={{
                 width: { xs: '50%', sm: '52%', md: '52%' },
                 height: 'auto',
@@ -338,6 +340,7 @@ function ChoicesPage() {
               component="img"
               src={arrowIcon}
               alt="Forward"
+              loading="lazy"
               sx={{
                 width: { xs: '50%', sm: '52%', md: '52%' },
                 height: 'auto',

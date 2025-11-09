@@ -16,7 +16,12 @@ function LandingPage() {
     <Box
       sx={{
         width: '100vw',
-        minHeight: '100vh', // Changed to minHeight to allow content expansion
+        height: '100vh',
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -26,6 +31,9 @@ function LandingPage() {
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
         boxSizing: 'border-box',
+        overflow: 'hidden',
+        margin: 0,
+        padding: 0,
       }}
       role="main"
       aria-label="Landing Page"
@@ -53,6 +61,7 @@ function LandingPage() {
           component="img"
           src={roundIcon}
           alt="Round Icon"
+          loading="lazy"
           sx={{
             width: {
               xs: '15vw', // Smaller for mobile
@@ -77,6 +86,7 @@ function LandingPage() {
           component="img"
           src={titleImage}
           alt="MANA OF ARTA Title"
+          loading="lazy"
           sx={{
             width: {
               xs: '40vw', // Smaller for mobile
