@@ -1,10 +1,14 @@
+import { useNavigate } from 'react-router-dom'
 import offeringsBg from '../assets/Our Offerings.png'
 import clockIcon from '../assets/clock png.png'
 import chatIcon from '../assets/chat png.png'
+import arrowIcon from '../assets/Arrow png.png'
 import { Box } from '@mui/material'
 import { motion } from 'framer-motion'
 
 function OfferingsPage() {
+  const navigate = useNavigate()
+  
   const individualPackages = [
     {
       title: 'Single Sessions',
@@ -70,7 +74,7 @@ function OfferingsPage() {
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
-        backgroundAttachment: 'fixed', // Parallax effect
+        backgroundAttachment: { xs: 'scroll', md: 'fixed' }, // Scroll on mobile, fixed on desktop
         scrollbarWidth: 'none',
         msOverflowStyle: 'none',
         margin: 0,
@@ -85,10 +89,11 @@ function OfferingsPage() {
       <Box
         sx={{
           width: '100%',
-          height: '100%',
+          minHeight: { xs: '100%', md: '100%' }, // Allow content to grow on mobile
           display: 'flex',
           flexDirection: 'column',
           padding: { xs: '1rem 1rem', sm: '1.75rem 1.5rem', md: '2.5rem 2rem' }, // Reduced padding for mobile
+          paddingBottom: { xs: '5rem', md: '2.5rem' }, // Extra bottom padding for arrows on mobile
           overflow: 'visible',
           position: 'relative',
         }}
@@ -152,6 +157,7 @@ function OfferingsPage() {
             alignContent: 'center',
             justifyItems: 'stretch',
             paddingBottom: { xs: '1rem', md: 0 },
+            marginBottom: { xs: '1rem', md: 0 }, // Space for arrows on mobile
           }}
         >
           {[
@@ -336,6 +342,87 @@ function OfferingsPage() {
               </Box>
             </motion.div>
           ))}
+        </Box>
+
+        {/* Navigation Arrows */}
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            gap: { xs: '0.5rem', sm: '1rem', md: '1.25rem' },
+            marginTop: { xs: '1.5rem', md: 'auto' },
+            padding: { xs: '0.5rem', sm: '0.75rem', md: '0' },
+            maxWidth: '100%',
+            flexWrap: 'wrap',
+            position: { xs: 'relative', md: 'static' }, // Ensure visibility on mobile
+            zIndex: 10, // Ensure arrows are above other content
+          }}
+        >
+          {/* Left Arrow Button - Navigate to Philosophy */}
+          <Box
+            component={motion.div}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => navigate('/philosophy')}
+            sx={{
+              width: { xs: '40px', sm: '48px', md: '54px' },
+              height: { xs: '40px', sm: '48px', md: '54px' },
+              background: 'linear-gradient(180deg, #1c2428 0%, #080b0d 100%)',
+              border: '1px solid rgba(82, 96, 104, 0.75)',
+              borderRadius: '6px',
+              boxShadow: '0 6px 14px rgba(0, 0, 0, 0.45)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+            }}
+          >
+            <Box
+              component="img"
+              src={arrowIcon}
+              alt="Back"
+              loading="lazy"
+              sx={{
+                width: { xs: '50%', sm: '52%', md: '52%' },
+                height: 'auto',
+                transform: 'scaleX(-1)',
+                filter: 'invert(0.35) sepia(0) saturate(0) hue-rotate(0deg) brightness(0.85)',
+              }}
+            />
+          </Box>
+
+          {/* Right Arrow Button - Navigate to Contact */}
+          <Box
+            component={motion.div}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => navigate('/contact')}
+            sx={{
+              width: { xs: '40px', sm: '48px', md: '54px' },
+              height: { xs: '40px', sm: '48px', md: '54px' },
+              background: 'linear-gradient(180deg, #0f3f25 0%, #021b0f 100%)',
+              border: '1px solid rgba(0, 170, 109, 0.8)',
+              borderRadius: '6px',
+              boxShadow: '0 6px 14px rgba(0, 0, 0, 0.45)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+            }}
+          >
+            <Box
+              component="img"
+              src={arrowIcon}
+              alt="Forward"
+              loading="lazy"
+              sx={{
+                width: { xs: '50%', sm: '52%', md: '52%' },
+                height: 'auto',
+                filter: 'invert(1) brightness(1.15)',
+              }}
+            />
+          </Box>
         </Box>
       </Box>
     </Box>

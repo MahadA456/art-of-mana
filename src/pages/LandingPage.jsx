@@ -31,7 +31,7 @@ function LandingPage() {
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
         boxSizing: 'border-box',
-        overflow: 'hidden',
+        overflowY: { xs: 'auto', md: 'hidden' }, // Scrollable on mobile, hidden on desktop
         margin: 0,
         padding: 0,
       }}

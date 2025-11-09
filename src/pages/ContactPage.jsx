@@ -1,10 +1,14 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import emailjs from 'emailjs-com'
 import girlImage from '../assets/girl.png'
+import arrowIcon from '../assets/Arrow png.png'
 import { Box, TextField, Alert } from '@mui/material'
 import { motion } from 'framer-motion'
 
 function ContactPage() {
+  const navigate = useNavigate()
+  
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -149,6 +153,7 @@ function ContactPage() {
           display: 'flex',
           flexDirection: 'column',
           padding: { xs: '1.25rem 1rem', sm: '1.75rem 1.5rem', md: '2.75rem 2.25rem' }, // Reduced padding for mobile
+          paddingBottom: { xs: '5rem', md: '2.75rem' }, // Extra bottom padding for arrows on mobile
           overflow: 'hidden',
           position: 'relative',
           justifyContent: 'center',
@@ -369,6 +374,54 @@ function ContactPage() {
             {loading ? 'SENDING...' : 'SUBMIT'}
           </motion.button>
         </motion.form>
+
+        {/* Navigation Arrows */}
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            gap: { xs: '0.5rem', sm: '1rem', md: '1.25rem' },
+            marginTop: { xs: '1.5rem', md: 'auto' },
+            padding: { xs: '0.5rem', sm: '0.75rem', md: '0' },
+            maxWidth: '100%',
+            flexWrap: 'wrap',
+            position: { xs: 'relative', md: 'static' },
+            zIndex: 10,
+          }}
+        >
+          {/* Left Arrow Button - Navigate to Offerings */}
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => navigate('/offerings')}
+            style={{
+              width: '40px',
+              height: '40px',
+              background: 'linear-gradient(180deg, #1c2428 0%, #080b0d 100%)',
+              border: '1px solid rgba(82, 96, 104, 0.75)',
+              borderRadius: '6px',
+              boxShadow: '0 6px 14px rgba(0, 0, 0, 0.45)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+            }}
+          >
+            <Box
+              component="img"
+              src={arrowIcon}
+              alt="Back"
+              loading="lazy"
+              sx={{
+                width: { xs: '50%', sm: '52%', md: '52%' },
+                height: 'auto',
+                transform: 'scaleX(-1)',
+                filter: 'invert(0.35) sepia(0) saturate(0) hue-rotate(0deg) brightness(0.85)',
+              }}
+            />
+          </motion.div>
+        </Box>
       </Box>
     </Box>
   )

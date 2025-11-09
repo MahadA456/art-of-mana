@@ -1,8 +1,12 @@
+import { useNavigate } from 'react-router-dom'
 import welcomeBg from '../assets/Welcome.png'
+import arrowIcon from '../assets/Arrow png.png'
 import { Box } from '@mui/material'
 import { motion as Motion } from 'framer-motion'
 
 function WelcomePage() {
+  const navigate = useNavigate()
+  
   return (
     <Box
       sx={{
@@ -21,6 +25,7 @@ function WelcomePage() {
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
+        backgroundAttachment: { xs: 'scroll', md: 'fixed' }, // Scroll on mobile, fixed on desktop
         overflowY: 'auto',
         opacity: 1,
         borderWidth: '1px',
@@ -52,9 +57,10 @@ function WelcomePage() {
           justifyContent: 'space-between',
           width: '100%',
           maxWidth: '1000px',
-          height: '100%',
+          minHeight: { xs: '100%', md: '100%' }, // Allow content to grow on mobile
           padding: { xs: '2rem 1rem', sm: '3rem 2rem', md: '2rem' },
           paddingTop: { xs: '40%', sm: '35%', md: '1%' },
+          paddingBottom: { xs: '5rem', md: '2rem' }, // Extra bottom padding for arrows on mobile
           textAlign: 'start',
           position: 'relative',
           zIndex: 1,
@@ -191,6 +197,53 @@ function WelcomePage() {
           Learn More
         </Motion.button>
         </div>
+
+        {/* Navigation Arrows */}
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            gap: { xs: '0.5rem', sm: '1rem', md: '1.25rem' },
+            marginTop: { xs: '1.5rem', md: 'auto' },
+            padding: { xs: '0.5rem', sm: '0.75rem', md: '0' },
+            maxWidth: '100%',
+            flexWrap: 'wrap',
+            position: { xs: 'relative', md: 'static' },
+            zIndex: 10,
+          }}
+        >
+          {/* Right Arrow Button - Navigate to Explore */}
+          <Motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => navigate('/explore')}
+            style={{
+              width: '40px',
+              height: '40px',
+              background: 'linear-gradient(180deg, #0f3f25 0%, #021b0f 100%)',
+              border: '1px solid rgba(0, 170, 109, 0.8)',
+              borderRadius: '6px',
+              boxShadow: '0 6px 14px rgba(0, 0, 0, 0.45)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+            }}
+          >
+            <Box
+              component="img"
+              src={arrowIcon}
+              alt="Forward"
+              loading="lazy"
+              sx={{
+                width: { xs: '50%', sm: '52%', md: '52%' },
+                height: 'auto',
+                filter: 'invert(1) brightness(1.15)',
+              }}
+            />
+          </Motion.div>
+        </Box>
       </Box>
     </Box>
   )
