@@ -1,12 +1,8 @@
-import { useNavigate } from 'react-router-dom'
 import philosophyImage from '../assets/philosphy.jpg'
-import arrowIcon from '../assets/Arrow png.png'
 import { Box } from '@mui/material'
 import { motion } from 'framer-motion'
 
 function PhilosophyPage() {
-  const navigate = useNavigate()
-  
   return (
     <Box
       sx={{
@@ -70,7 +66,7 @@ function PhilosophyPage() {
           display: 'flex',
           flexDirection: 'column',
           padding: { xs: '1.5rem 1rem', sm: '2rem 1.5rem', md: '3rem 2.75rem' }, // Reduced padding for mobile
-          paddingBottom: { xs: '5rem', md: '3rem' }, // Extra bottom padding for arrows on mobile
+          paddingBottom: { xs: '3rem', md: '3rem' },
           overflowY: 'auto', // Enable scrolling for overflow content
           justifyContent: { xs: 'flex-start', md: 'center' }, // Align content properly
         }}
@@ -395,85 +391,6 @@ function PhilosophyPage() {
               </div>
             </motion.div>
           </Box>
-        </Box>
-
-        {/* Navigation Arrows */}
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            gap: { xs: '0.5rem', sm: '1rem', md: '1.25rem' },
-            marginTop: { xs: '1.5rem', md: 'auto' },
-            padding: { xs: '0.5rem', sm: '0.75rem', md: '0' },
-            maxWidth: '100%',
-            flexWrap: 'wrap',
-            position: { xs: 'relative', md: 'static' },
-            zIndex: 10,
-          }}
-        >
-          {/* Left Arrow Button - Navigate to Choices */}
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => navigate('/choices')}
-            style={{
-              width: '40px',
-              height: '40px',
-              background: 'linear-gradient(180deg, #1c2428 0%, #080b0d 100%)',
-              border: '1px solid rgba(82, 96, 104, 0.75)',
-              borderRadius: '6px',
-              boxShadow: '0 6px 14px rgba(0, 0, 0, 0.45)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              cursor: 'pointer',
-            }}
-          >
-            <Box
-              component="img"
-              src={arrowIcon}
-              alt="Back"
-              loading="lazy"
-              sx={{
-                width: { xs: '50%', sm: '52%', md: '52%' },
-                height: 'auto',
-                transform: 'scaleX(-1)',
-                filter: 'invert(0.35) sepia(0) saturate(0) hue-rotate(0deg) brightness(0.85)',
-              }}
-            />
-          </motion.div>
-
-          {/* Right Arrow Button - Navigate to Offerings */}
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => navigate('/offerings')}
-            style={{
-              width: '40px',
-              height: '40px',
-              background: 'linear-gradient(180deg, #0f3f25 0%, #021b0f 100%)',
-              border: '1px solid rgba(0, 170, 109, 0.8)',
-              borderRadius: '6px',
-              boxShadow: '0 6px 14px rgba(0, 0, 0, 0.45)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              cursor: 'pointer',
-            }}
-          >
-            <Box
-              component="img"
-              src={arrowIcon}
-              alt="Forward"
-              loading="lazy"
-              sx={{
-                width: { xs: '50%', sm: '52%', md: '52%' },
-                height: 'auto',
-                filter: 'invert(1) brightness(1.15)',
-              }}
-            />
-          </motion.div>
         </Box>
       </Box>
     </Box>
