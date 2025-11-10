@@ -36,6 +36,7 @@ function MenuPage() {
       sx={{
         width: '100vw',
         height: '100vh',
+        fontFamily: 'Calibri, "Segoe UI", Arial, sans-serif',
         position: 'fixed',
         top: 0,
         left: 0,
@@ -51,6 +52,7 @@ function MenuPage() {
         margin: 0,
         padding: 0,
       }}
+      onClick={() => navigate('/')}
     >
       {/* Sidebar */}
       <motion.div
@@ -58,6 +60,7 @@ function MenuPage() {
         animate={{ x: 0 }}
         transition={{ type: 'spring', damping: 25, stiffness: 200 }}
         className="h-full w-[22%] min-w-[200px] max-w-[280px] bg-[#0f0f0f] border-r border-[#2a2a2a] flex flex-col py-10 px-6 md:px-8"
+        onClick={(event) => event.stopPropagation()}
       >
         {menuItems.map((item, index) => (
           <motion.div
@@ -69,10 +72,10 @@ function MenuPage() {
             className="flex items-center justify-between cursor-pointer py-5 group"
             whileHover={{ x: 5 }}
           >
-            <span className="text-white text-base md:text-lg font-normal font-sans capitalize tracking-normal text-left">
+            <span className="text-white text-base md:text-lg font-normal capitalize tracking-normal text-left" style={{ fontFamily: 'Calibri, "Segoe UI", Arial, sans-serif' }}>
               {item}
             </span>
-            <span className="text-white text-lg md:text-xl ml-2">></span>
+            <span className="text-white text-lg md:text-xl ml-2">{'>'}</span>
           </motion.div>
         ))}
       </motion.div>
@@ -85,7 +88,7 @@ function MenuPage() {
           left: '50%',
           transform: 'translateX(-50%)',
           width: '100%',
-          display: 'flex',
+          display: { xs: 'none', md: 'flex' },
           justifyContent: 'center',
           alignItems: 'center',
           padding: { xs: '0.75rem', sm: '1rem', md: '1.5rem' }, // Reduced padding for mobile
@@ -139,7 +142,7 @@ function MenuPage() {
           component="span"
           sx={{
             color: 'white',
-            fontFamily: 'Poppins, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif',
+            fontFamily: 'Calibri, "Segoe UI", Arial, sans-serif',
             fontWeight: 500,
             fontStyle: 'normal',
             fontSize: { xs: 'clamp(0.875rem, 3vw, 1rem)', sm: 'clamp(0.95rem, 3.3vw, 1.2rem)', md: 'clamp(1.05rem, 3.6vw, 1.4rem)' }, // Smaller font for mobile

@@ -1,233 +1,63 @@
 import exploreImage from '../assets/exploree.jpg'
-import { Box } from '@mui/material'
-// eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion'
 
-function ExplorePage() {
+export default function ExplorePage() {
   return (
-    <Box
-      sx={{
-        width: '100vw',
-        height: '100vh', // Restored original height for desktop
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        display: 'flex',
-        flexDirection: { xs: 'column', md: 'row' }, // Desktop remains row
-        overflowY: 'auto', // Enable vertical scrolling
-        margin: 0,
-        padding: 0,
-        boxSizing: 'border-box',
-      }}
-    >
+    <div className="w-screen h-screen fixed top-0 left-0 flex flex-col md:flex-row overflow-y-auto m-0 p-0 box-border">
       {/* Left Section - Image */}
-      <Box
-        sx={{
-          width: { xs: '100%', md: '38%' }, // Desktop width unchanged
-          height: { xs: '35%', sm: '38%', md: '100%' }, // Adjusted for mobile, original for desktop
-          position: 'relative',
-          overflow: 'hidden',
-        }}
-      >
-        <Box
-          component="img"
+      <div className="relative w-full md:w-[38%] h-[35%] sm:h-[38%] md:h-full overflow-hidden">
+        <img
           src={exploreImage}
           alt="Explore"
           loading="lazy"
-          sx={{
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-          }}
+          className="w-full h-full object-cover"
         />
         {/* Dark overlay */}
-        <Box
-          sx={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundColor: 'rgba(0, 0, 0, 0.5)',
-            zIndex: 0,
-          }}
-        />
-        {/* Green overlay effect */}
-        <Box
-          sx={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            background: 'linear-gradient(90deg, rgba(0, 255, 0, 0.1) 0%, rgba(0, 255, 0, 0.05) 100%)',
-            zIndex: 1,
-          }}
-        />
-      </Box>
+        <div className="absolute inset-0 bg-black/50 z-0"></div>
+        {/* Green overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-green-400/10 to-green-400/5 z-1"></div>
+      </div>
 
-      {/* Right Section - Text Content */}
-      <Box
-        sx={{
-          width: { xs: '100%', md: '62%' }, // Desktop width unchanged
-          minHeight: { xs: '65%', sm: '62%', md: '100%' }, // Adjusted for mobile, original for desktop
-          backgroundColor: '#000000',
-          display: 'flex',
-          flexDirection: 'column',
-          padding: { xs: '1.2rem 1rem', sm: '2.25rem 1.8rem', md: '3rem 2.5rem' }, // Reduced for mobile, original for desktop
-          paddingBottom: { xs: '3rem', md: '3rem' },
-          overflow: 'hidden', // Restored original overflow for desktop
-          position: 'relative',
-          justifyContent: 'center',
-        }}
-      >
-        {/* Scrollable Text Container */}
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            overflowX: { xs: 'auto', md: 'hidden' }, // Horizontal scroll only on mobile
-            WebkitOverflowScrolling: 'touch', // Smooth scrolling on mobile
-            '&::-webkit-scrollbar': {
-              height: '0.4rem',
-            },
-            '&::-webkit-scrollbar-thumb': {
-              backgroundColor: 'rgba(255, 255, 255, 0.3)',
-              borderRadius: '4px',
-            },
-            '&::-webkit-scrollbar-track': {
-              backgroundColor: 'transparent',
-            },
-          }}
-        >
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              minWidth: { xs: '300px', md: 'auto' }, // Minimum width for mobile scroll
-              maxWidth: { xs: '100%', md: 'auto' },
-            }}
-          >
-            {/* Main Heading */}
+      {/* Right Section - Text */}
+      <div className="w-full md:w-[62%] min-h-[65%] sm:min-h-[62%] md:min-h-full bg-black flex flex-col justify-center relative overflow-hidden px-2 sm:px-3 md:px-6 py-4 md:py-12 font-sans">
+        <div className="flex flex-col overflow-x-hidden">
+          <div className="flex flex-col w-full md:max-w-full pr-6 sm:pr-12 md:pr-36 pl-2 sm:pl-4 md:pl-1">
+            {/* Heading */}
             <motion.h1
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
-              style={{
-                fontFamily: 'Calibri, sans-serif',
-                fontWeight: 500,
-                fontStyle: 'normal',
-                fontSize: { xs: '22px', md: '28px' }, // Reduced for mobile, original for desktop
-                lineHeight: { xs: '1.3', md: '1.2' }, // Adjusted for mobile
-                letterSpacing: '0%',
-                color: 'white',
-                margin: 0,
-                marginBottom: { xs: '1rem', md: '1.4rem' }, // Reduced for mobile
-                textAlign: 'left',
-              }}
+              className="font-sans font-semibold text-white text-base sm:text-lg md:text-2xl leading-[1.3] md:leading-[1.2] mb-12 md:mb-20"
             >
               Explore Art Therapy
             </motion.h1>
 
-            {/* Text Paragraphs */}
+            {/* Paragraphs */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: { xs: '0.9rem', md: '1.1rem' }, // Reduced for mobile
-              }}
+              className="flex flex-col gap-4"
             >
-              <p
-                style={{
-                  fontFamily: 'Calibri, sans-serif',
-                  fontWeight: 300,
-                  fontStyle: 'normal',
-                  fontSize: { xs: '12px', md: '14px' }, // Reduced for mobile
-                  lineHeight: { xs: '1.5', md: '1.45' }, // Adjusted for mobile
-                  letterSpacing: '0%',
-                  textTransform: 'capitalize',
-                  color: 'white',
-                  margin: 0,
-                  textAlign: 'left',
-                }}
-              >
+              <p className="font-sans font-medium text-white text-[10px] sm:text-[11px] md:text-[13.5px] leading-[1.4] md:leading-[1.25] capitalize text-left whitespace-normal md:whitespace-nowrap">
                 Today, We Welcome You To Step In A New Panorama, And Fearlessly Explore A Venerable Tradition With A Fresh Set of Skills Salutary To Everyone
               </p>
-              <p
-                style={{
-                  fontFamily: 'Calibri, sans-serif',
-                  fontWeight: 300,
-                  fontStyle: 'normal',
-                  fontSize: { xs: '12px', md: '14px' },
-                  lineHeight: { xs: '1.5', md: '1.45' },
-                  letterSpacing: '0%',
-                  textTransform: 'capitalize',
-                  color: 'white',
-                  margin: 0,
-                  textAlign: 'left',
-                }}
-              >
+              <p className="font-sans font-medium text-white text-[9px] sm:text-[10px] md:text-[13px] leading-[1.4] md:leading-[1.25] capitalize text-left whitespace-normal md:whitespace-nowrap">
                 For Millennia, Our Earliest Ancestors Have Intuitively Applied The Therapeutic Power Of Arts For Self-expression And Healing
               </p>
-              <p
-                style={{
-                  fontFamily: 'Calibri, sans-serif',
-                  fontWeight: 300,
-                  fontStyle: 'normal',
-                  fontSize: { xs: '12px', md: '14px' },
-                  lineHeight: { xs: '1.5', md: '1.45' },
-                  letterSpacing: '0%',
-                  textTransform: 'capitalize',
-                  color: 'white',
-                  margin: 0,
-                  textAlign: 'left',
-                }}
-              >
+              <p className="font-sans font-medium text-white text-[9px] sm:text-[10px] md:text-[13px] leading-[1.4] md:leading-[1.25] capitalize text-left whitespace-normal md:whitespace-nowrap">
                 Since Mid-20th Century, The Discipline Of Art Therapy Stood As A Superior Non-pharmacological Modality With Minimal Side Effects
               </p>
-              <p
-                style={{
-                  fontFamily: 'Calibri, sans-serif',
-                  fontWeight: 300,
-                  fontStyle: 'normal',
-                  fontSize: { xs: '12px', md: '14px' },
-                  lineHeight: { xs: '1.5', md: '1.45' },
-                  letterSpacing: '0%',
-                  textTransform: 'capitalize',
-                  color: 'white',
-                  margin: 0,
-                  textAlign: 'left',
-                }}
-              >
+              <p className="font-sans font-medium text-white text-[9px] sm:text-[10px] md:text-[13px] leading-[1.4] md:leading-[1.25] capitalize text-left whitespace-normal md:whitespace-nowrap">
                 A Sustainable Tool For Life for Acute Crises through Loss, Grief, And Trauma and Chronic Conditions like Depression, Pain, Fatigue, Eating Abnormalities
               </p>
-              <p
-                style={{
-                  fontFamily: 'Calibri, sans-serif',
-                  fontWeight: 300,
-                  fontStyle: 'normal',
-                  fontSize: { xs: '12px', md: '14px' },
-                  lineHeight: { xs: '1.5', md: '1.45' },
-                  letterSpacing: '0%',
-                  textTransform: 'capitalize',
-                  color: 'white',
-                  margin: 0,
-                  textAlign: 'left',
-                }}
-              >
+              <p className="font-sans font-medium text-white text-[9px] sm:text-[10px] md:text-[13px] leading-[1.4] md:leading-[1.25] capitalize text-left whitespace-normal md:whitespace-nowrap">
                 Anxiety, Post Traumatic Stress Disorder (PTSD), Cognitive Impairments, and Autism Spectrum
               </p>
             </motion.div>
-          </Box>
-        </Box>
-      </Box>
-    </Box>
+          </div>
+        </div>
+      </div>
+    </div>
   )
 }
-
-export default ExplorePage

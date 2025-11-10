@@ -1,400 +1,106 @@
-import philosophyImage from '../assets/philosphy.jpg'
-import { Box } from '@mui/material'
-import { motion } from 'framer-motion'
+import { motion } from "framer-motion";
+import philosophyImage from "../assets/philosphy.jpg";
 
-function PhilosophyPage() {
+export default function PhilosophyPage() {
   return (
-    <Box
-      sx={{
-        width: '100vw',
-        height: '100vh',
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        display: 'flex',
-        flexDirection: { xs: 'column', md: 'row' },
-        backgroundColor: '#000000',
-        overflowY: 'auto',
-        margin: 0,
-        padding: 0,
-        boxSizing: 'border-box',
-      }}
-    >
+    <div className="w-screen h-screen fixed top-0 left-0 flex flex-col md:flex-row bg-black overflow-y-auto m-0 p-0 box-border">
       {/* Left Section - Image */}
-      <Box
-        sx={{
-          width: { xs: '100%', md: '42%' },
-          height: { xs: '30vh', sm: '35vh', md: '100vh' }, // Reduced height for mobile
-          position: 'relative',
-          overflow: 'hidden',
-        }}
-      >
-        <Box
-          component="img"
+      <div className="relative w-full md:w-[42%] h-[30vh] sm:h-[35vh] md:h-full overflow-hidden">
+        <img
           src={philosophyImage}
           alt="Philosophy"
           loading="lazy"
-          sx={{
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            objectPosition: 'center', // Ensure image is centered
-          }}
+          className="w-full h-full object-cover object-center"
         />
-        {/* Dark overlay */}
-        <Box
-          sx={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundColor: 'rgba(0, 0, 0, 0.5)',
-            zIndex: 0,
-          }}
-        />
-      </Box>
+        <div className="absolute inset-0 bg-black/50 z-0"></div>
+      </div>
 
-      {/* Right Section - Text Content */}
-      <Box
-        sx={{
-          width: { xs: '100%', md: '58%' },
-          minHeight: { xs: 'auto', md: '100vh' }, // Allow content to grow on mobile
-          backgroundColor: '#000000',
-          display: 'flex',
-          flexDirection: 'column',
-          padding: { xs: '1.5rem 1rem', sm: '2rem 1.5rem', md: '3rem 2.75rem' }, // Reduced padding for mobile
-          paddingBottom: { xs: '3rem', md: '3rem' },
-          overflowY: 'auto', // Enable scrolling for overflow content
-          justifyContent: { xs: 'flex-start', md: 'center' }, // Align content properly
-        }}
-      >
-        {/* Scrollable Content Container */}
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: { xs: '1rem', md: '1.5rem' },
-            overflowX: { xs: 'auto', md: 'hidden' }, // Horizontal scroll for mobile
-            WebkitOverflowScrolling: 'touch', // Smooth scrolling on mobile
-            '&::-webkit-scrollbar': {
-              height: '0.4rem',
-            },
-            '&::-webkit-scrollbar-thumb': {
-              backgroundColor: 'rgba(255, 255, 255, 0.3)',
-              borderRadius: '4px',
-            },
-            '&::-webkit-scrollbar-track': {
-              backgroundColor: 'transparent',
-            },
-          }}
-        >
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              minWidth: { xs: '300px', md: 'auto' }, // Minimum width to trigger scroll
-              maxWidth: { xs: '100%', md: 'auto' },
-            }}
+      {/* Right Section */}
+      <div className="w-full md:w-[58%] min-h-[65%] sm:min-h-[62%] md:min-h-full bg-black flex flex-col justify-start md:justify-center px-4 sm:px-6 md:px-10 py-6 md:py-14 overflow-y-auto font-[Calibri]">
+        <div className="flex flex-col gap-8 md:gap-10 overflow-x-auto md:overflow-x-hidden">
+          {/* Main Heading */}
+          <motion.h1
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            className="font-semibold text-white text-xl sm:text-2xl md:text-4xl leading-tight mb-6"
           >
-            {/* Main Title */}
-            <Box
-              component={motion.h1}
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              sx={{
-                fontFamily: 'Calibri, sans-serif',
-                fontWeight: 700,
-                fontStyle: 'normal',
-                fontSize: { xs: '24px', sm: '30px', md: '42px' }, // Smaller font for mobile
-                lineHeight: 1.2, // Slightly increased for readability
-                letterSpacing: '0%',
-                color: 'white',
-                margin: 0,
-                marginBottom: { xs: '1rem', md: '2rem' },
-                textAlign: 'left',
-              }}
-            >
-              Philosophy
-            </Box>
+            Philosophy
+          </motion.h1>
 
-            {/* I AM ART Section */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '1rem', // Reduced gap for mobile
-                marginBottom: '1.5rem',
-              }}
-            >
-              <Box
-                component="h2"
-                sx={{
-                  fontFamily: 'Calibri, sans-serif',
-                  fontWeight: 700,
-                  fontStyle: 'normal',
-                  fontSize: { xs: '16px', sm: '18px', md: '24px' }, // Smaller font for mobile
-                  lineHeight: 1.2,
-                  letterSpacing: '0%',
-                  color: 'white',
-                  margin: 0,
-                  textAlign: 'left',
-                }}
-              >
-                I AM ART
-              </Box>
-              
-              <div
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '0.5rem', // Reduced gap for paragraphs
-                }}
-              >
-                <Box
-                  component="p"
-                  sx={{
-                    fontFamily: 'Calibri, sans-serif',
-                    fontWeight: 400,
-                    fontStyle: 'normal',
-                    fontSize: { xs: '12px', sm: '13px', md: '15px' }, // Smaller font for mobile
-                    lineHeight: 1.5, // Increased for readability
-                    letterSpacing: '0%',
-                    color: 'white',
-                    margin: 0,
-                    textAlign: 'left',
-                  }}
-                >
-                  I Am Art- an Echo Of The Universe Within Me, Paradoxical And Inimitable
-                </Box>
-                <Box
-                  component="p"
-                  sx={{
-                    fontFamily: 'Calibri, sans-serif',
-                    fontWeight: 400,
-                    fontStyle: 'normal',
-                    fontSize: { xs: '12px', sm: '13px', md: '15px' },
-                    lineHeight: 1.5,
-                    letterSpacing: '0%',
-                    color: 'white',
-                    margin: 0,
-                    textAlign: 'left',
-                  }}
-                >
-                  A Unique Celebration Of Life, Changing, Adopting, Being And Becoming; Yet Remaining Me I Am Art-
-                </Box>
-                <Box
-                  component="p"
-                  sx={{
-                    fontFamily: 'Calibri, sans-serif',
-                    fontWeight: 400,
-                    fontStyle: 'normal',
-                    fontSize: { xs: '12px', sm: '13px', md: '15px' },
-                    lineHeight: 1.5,
-                    letterSpacing: '0%',
-                    color: 'white',
-                    margin: 0,
-                    textAlign: 'left',
-                  }}
-                >
-                  A Masterpiece, A Drama. The Polish, The Paint, The Façade. The Pain, The Trauma, The Depth
-                </Box>
-                <Box
-                  component="p"
-                  sx={{
-                    fontFamily: 'Calibri, sans-serif',
-                    fontWeight: 400,
-                    fontStyle: 'normal',
-                    fontSize: { xs: '12px', sm: '13px', md: '15px' },
-                    lineHeight: 1.5,
-                    letterSpacing: '0%',
-                    color: 'white',
-                    margin: 0,
-                    textAlign: 'left',
-                  }}
-                >
-                  A Bold Statement Of Freedom-dare To Live, To Fight, To Love And To Expand Horizons
-                </Box>
-                <Box
-                  component="p"
-                  sx={{
-                    fontFamily: 'Calibri, sans-serif',
-                    fontWeight: 400,
-                    fontStyle: 'normal',
-                    fontSize: { xs: '12px', sm: '13px', md: '15px' },
-                    lineHeight: 1.5,
-                    letterSpacing: '0%',
-                    color: 'white',
-                    margin: 0,
-                    textAlign: 'left',
-                  }}
-                >
-                  The Curiosity To Fully Explore My Femininity, My Muscularity, And All The Shades In Between
-                </Box>
-                <Box
-                  component="p"
-                  sx={{
-                    fontFamily: 'Calibri, sans-serif',
-                    fontWeight: 400,
-                    fontStyle: 'normal',
-                    fontSize: { xs: '12px', sm: '13px', md: '15px' },
-                    lineHeight: 1.5,
-                    letterSpacing: '0%',
-                    color: 'white',
-                    margin: 0,
-                    textAlign: 'left',
-                  }}
-                >
-                  The History Behind- A Memory, And A Far Beautiful Vision For Tomorrow Beyond,
-                </Box>
-                <Box
-                  component="p"
-                  sx={{
-                    fontFamily: 'Calibri, sans-serif',
-                    fontWeight: 400,
-                    fontStyle: 'normal',
-                    fontSize: { xs: '12px', sm: '13px', md: '15px' },
-                    lineHeight: 1.5,
-                    letterSpacing: '0%',
-                    color: 'white',
-                    margin: 0,
-                    textAlign: 'left',
-                  }}
-                >
-                  At This Momentum which I Pause Wholly To Sketch My Timeless Legend
-                </Box>
-              </div>
-            </motion.div>
+          {/* I AM ART Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="flex flex-col gap-3"
+          >
+            <h2 className="text-white font-medium text-base sm:text-lg md:text-xl mb-2 underline underline-offset-8 decoration-green-400">
+              I AM ART
+            </h2>
+            <div className="flex flex-col gap-1.5">
+              <p className="text-white font-medium text-[11px] sm:text-[12.5px] md:text-[14px] leading-relaxed">
+                I Am Art — an Echo Of The Universe Within Me, Paradoxical And
+                Inimitable.
+              </p>
+              <p className="text-white font-medium text-[11px] sm:text-[12.5px] md:text-[14px] leading-relaxed">
+                A Unique Celebration Of Life, Changing, Adopting, Being And
+                Becoming; Yet Remaining Me I Am Art —
+              </p>
+              <p className="text-white font-medium text-[11px] sm:text-[12.5px] md:text-[14px] leading-relaxed">
+                A Masterpiece, A Drama. The Polish, The Paint, The Façade. The
+                Pain, The Trauma, The Depth.
+              </p>
+              <p className="text-white font-medium text-[11px] sm:text-[12.5px] md:text-[14px] leading-relaxed">
+                A Bold Statement Of Freedom — Dare To Live, To Fight, To Love
+                And To Expand Horizons.
+              </p>
+              <p className="text-white font-medium text-[11px] sm:text-[12.5px] md:text-[14px] leading-relaxed">
+                The Curiosity To Fully Explore My Femininity, My Muscularity,
+                And All The Shades In Between.
+              </p>
+              <p className="text-white font-medium text-[11px] sm:text-[12.5px] md:text-[14px] leading-relaxed">
+                The History Behind — A Memory, And A Far Beautiful Vision For
+                Tomorrow Beyond.
+              </p>
+              <p className="text-white font-medium text-[11px] sm:text-[12.5px] md:text-[14px] leading-relaxed">
+                At This Momentum Which I Pause Wholly To Sketch My Timeless
+                Legend.
+              </p>
+            </div>
+          </motion.div>
 
-            {/* I AM NATURE Section */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '1rem', // Reduced gap for mobile
-                marginBottom: '1.5rem',
-              }}
-            >
-              <Box
-                component="h2"
-                sx={{
-                  fontFamily: 'Calibri, sans-serif',
-                  fontWeight: 700,
-                  fontStyle: 'normal',
-                  fontSize: { xs: '16px', sm: '18px', md: '24px' }, // Smaller font for mobile
-                  lineHeight: 1.2,
-                  letterSpacing: '0%',
-                  color: 'white',
-                  margin: 0,
-                  textAlign: 'left',
-                }}
-              >
-                I AM NATURE
-              </Box>
-              
-              <div
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '0.5rem', // Reduced gap for paragraphs
-                }}
-              >
-                <Box
-                  component="p"
-                  sx={{
-                    fontFamily: 'Calibri, sans-serif',
-                    fontWeight: 400,
-                    fontStyle: 'normal',
-                    fontSize: { xs: '12px', sm: '13px', md: '15px' },
-                    lineHeight: 1.5,
-                    letterSpacing: '0%',
-                    color: 'white',
-                    margin: 0,
-                    textAlign: 'left',
-                  }}
-                >
-                  I Am Nature - a beat of life in balance with infinite lives around me.
-                </Box>
-                <Box
-                  component="p"
-                  sx={{
-                    fontFamily: 'Calibri, sans-serif',
-                    fontWeight: 400,
-                    fontStyle: 'normal',
-                    fontSize: { xs: '12px', sm: '13px', md: '15px' },
-                    lineHeight: 1.5,
-                    letterSpacing: '0%',
-                    color: 'white',
-                    margin: 0,
-                    textAlign: 'left',
-                  }}
-                >
-                  The sequences of expansion, pause; contraction, and pause.
-                </Box>
-                <Box
-                  component="p"
-                  sx={{
-                    fontFamily: 'Calibri, sans-serif',
-                    fontWeight: 400,
-                    fontStyle: 'normal',
-                    fontSize: { xs: '12px', sm: '13px', md: '15px' },
-                    lineHeight: 1.5,
-                    letterSpacing: '0%',
-                    color: 'white',
-                    margin: 0,
-                    textAlign: 'left',
-                  }}
-                >
-                  a seed of dream striving to fully germinate.
-                </Box>
-                <Box
-                  component="p"
-                  sx={{
-                    fontFamily: 'Calibri, sans-serif',
-                    fontWeight: 400,
-                    fontStyle: 'normal',
-                    fontSize: { xs: '12px', sm: '13px', md: '15px' },
-                    lineHeight: 1.5,
-                    letterSpacing: '0%',
-                    color: 'white',
-                    margin: 0,
-                    textAlign: 'left',
-                  }}
-                >
-                  I accept, I honor and celebrate the hardship to be.
-                </Box>
-                <Box
-                  component="p"
-                  sx={{
-                    fontFamily: 'Calibri, sans-serif',
-                    fontWeight: 400,
-                    fontStyle: 'normal',
-                    fontSize: { xs: '12px', sm: '13px', md: '15px' },
-                    lineHeight: 1.5,
-                    letterSpacing: '0%',
-                    color: 'white',
-                    margin: 0,
-                    textAlign: 'left',
-                  }}
-                >
-                  a short life, yet an everlasting mark.
-                </Box>
-              </div>
-            </motion.div>
-          </Box>
-        </Box>
-      </Box>
-    </Box>
-  )
+          {/* I AM NATURE Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="flex flex-col gap-3"
+          >
+            <h2 className="text-white font-medium text-base sm:text-lg md:text-xl mb-2 underline underline-offset-8 decoration-green-400">
+              I AM NATURE
+            </h2>
+            <div className="flex flex-col gap-1.5">
+              <p className="text-white font-medium text-[11px] sm:text-[12.5px] md:text-[14px] leading-relaxed">
+                I Am Nature — a beat of life in balance with infinite lives
+                around me.
+              </p>
+              <p className="text-white font-medium text-[11px] sm:text-[12.5px] md:text-[14px] leading-relaxed">
+                The sequences of expansion, pause; contraction, and pause.
+              </p>
+              <p className="text-white font-medium text-[11px] sm:text-[12.5px] md:text-[14px] leading-relaxed">
+                A seed of dream striving to fully germinate.
+              </p>
+              <p className="text-white font-medium text-[11px] sm:text-[12.5px] md:text-[14px] leading-relaxed">
+                I accept, I honor and celebrate the hardship to be.
+              </p>
+              <p className="text-white font-medium text-[11px] sm:text-[12.5px] md:text-[14px] leading-relaxed">
+                A short life, yet an everlasting mark.
+              </p>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </div>
+  );
 }
-
-export default PhilosophyPage

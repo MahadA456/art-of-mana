@@ -1,357 +1,109 @@
 import { useNavigate } from 'react-router-dom'
+import { motion as Motion } from 'framer-motion'
 import choiceImage from '../assets/choice.jpg'
 import arrowIcon from '../assets/Arrow png.png'
-import { Box } from '@mui/material'
-import { motion } from 'framer-motion'
 
-function ChoicesPage() {
+export default function ChoicesPage() {
   const navigate = useNavigate()
+
   return (
-    <Box
-      sx={{
-        width: '100vw',
-        height: '100vh',
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        display: 'flex',
-        flexDirection: { xs: 'column', md: 'row' },
-        overflowY: 'auto',
-        margin: 0,
-        padding: 0,
-        boxSizing: 'border-box',
-      }}
-    >
+    <div className="w-screen h-screen fixed top-0 left-0 flex flex-col md:flex-row overflow-y-auto m-0 p-0 box-border">
       {/* Left Section - Image */}
-      <Box
-        sx={{
-          width: { xs: '100%', md: '38%' },
-          height: { xs: '25vh', sm: '30vh', md: '100%' }, // Reduced height for mobile
-          position: 'relative',
-          overflow: 'hidden',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          backgroundColor: '#000000',
-          margin: 0,
-          padding: 0,
-        }}
-      >
-        <Box
-          component="img"
+      <div className="relative w-full md:w-[38%] h-[25vh] sm:h-[30vh] md:h-full flex items-center justify-center bg-black overflow-hidden">
+        <img
           src={choiceImage}
           alt="Choices"
           loading="lazy"
-          sx={{
-            width: '100%',
-            height: '100%',
-            objectFit: { xs: 'cover', md: 'contain' },
-            objectPosition: 'center',
-          }}
+          className="w-full h-full object-cover md:object-contain object-center"
         />
-        {/* Dark overlay */}
-        <Box
-          sx={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundColor: 'rgba(0, 0, 0, 0.5)',
-            zIndex: 0,
-          }}
-        />
-      </Box>
+        <div className="absolute inset-0 bg-black/50 z-0"></div>
+      </div>
 
       {/* Right Section - Text Content */}
-      <Box
-        sx={{
-          width: { xs: '100%', md: '62%' },
-          minHeight: { xs: '75vh', md: '100%' }, // Adjusted for mobile
-          backgroundColor: '#000000',
-          display: 'flex',
-          flexDirection: 'column',
-          padding: { xs: '0.75rem 0.5rem', sm: '1.5rem 1rem', md: '2.5rem 2.2rem' }, // Reduced padding for mobile
-          overflow: 'hidden',
-          position: 'relative',
-          margin: 0,
-          justifyContent: { xs: 'space-between', md: 'center' }, // Adjusted for mobile
-          boxSizing: 'border-box',
-        }}
-      >
+      <div className="w-full md:w-[62%] min-h-[75vh] md:min-h-full bg-black flex flex-col justify-between md:justify-center relative overflow-hidden px-2 sm:px-4 md:px-8 py-4 sm:py-8 md:py-14">
         {/* Main Heading */}
-        <motion.h1
+        <Motion.h1
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
-          style={{
-            fontFamily: 'Calibri, sans-serif',
-            fontWeight: 500,
-            fontStyle: 'normal',
-            fontSize: { xs: '18px', sm: '22px', md: '28px' }, // Reduced for mobile
-            lineHeight: { xs: 1.3, sm: 1.2, md: '1.15' },
-            letterSpacing: { xs: '0.02em', md: '0%' },
-            color: 'white',
-            margin: 0,
-            marginBottom: { xs: '0.75rem', sm: '1.25rem', md: '1.5rem' },
-            textAlign: 'left',
-            maxWidth: '100%',
-            wordBreak: 'break-word',
-          }}
+          className="font-sans font-medium text-white text-lg sm:text-xl md:text-2xl leading-snug sm:leading-tight md:leading-[1.2] mb-4 sm:mb-6 md:mb-8 tracking-wide text-left"
         >
           Your Choice
-        </motion.h1>
+        </Motion.h1>
 
-        {/* Scrollable Content Container */}
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: { xs: '0.6rem', sm: '1rem', md: '1.25rem' }, // Reduced gap for mobile
-            flexGrow: 1,
-            overflowX: { xs: 'auto', md: 'hidden' }, // Horizontal scroll for mobile
-            WebkitOverflowScrolling: 'touch', // Smooth scrolling on mobile
-            maxHeight: { xs: '55vh', md: 'auto' }, // Limit height for mobile
-            '&::-webkit-scrollbar': {
-              height: '0.4rem',
-            },
-            '&::-webkit-scrollbar-thumb': {
-              backgroundColor: 'rgba(255, 255, 255, 0.3)',
-              borderRadius: '4px',
-            },
-            '&::-webkit-scrollbar-track': {
-              backgroundColor: 'transparent',
-            },
-          }}
-        >
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              minWidth: { xs: '300px', md: 'auto' }, // Minimum width to trigger scroll
-              maxWidth: { xs: '100%', md: 'auto' },
-            }}
-          >
-            <motion.div
+        {/* Scrollable Content */}
+        <div className="flex flex-col gap-3 sm:gap-4 overflow-x-auto md:overflow-x-hidden max-h-[55vh] md:max-h-full pb-4 md:pb-6 scroll-smooth">
+          <div className="flex flex-col min-w-[300px] md:min-w-auto md:max-w-full">
+            <Motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: { xs: '0.6rem', sm: '1rem', md: '1.25rem' },
-                marginBottom: { xs: '0.5rem', sm: '1rem', md: '1.2rem' },
-              }}
+              className="flex flex-col gap-4 sm:gap-5 mb-4 sm:mb-6 md:mb-8"
             >
               {/* TRAUMA Section */}
               <div>
-                <h2
-                  style={{
-                    fontFamily: 'Calibri, sans-serif',
-                    fontWeight: 600,
-                    fontStyle: 'normal',
-                    fontSize: { xs: '14px', sm: '16px', md: '18px' }, // Reduced for mobile
-                    lineHeight: { xs: 1.4, sm: 1.3, md: '22px' },
-                    letterSpacing: { xs: '0.02em', md: '0%' },
-                    color: 'white',
-                    margin: 0,
-                    marginBottom: { xs: '0.3rem', sm: '0.5rem', md: '0.6rem' },
-                    textAlign: 'left',
-                    textDecoration: 'underline',
-                    textTransform: 'uppercase',
-                    maxWidth: '100%',
-                    wordBreak: 'break-word',
-                  }}
-                >
+                <h2 className="font-sans font-semibold text-white text-[13px] sm:text-[14px] md:text-[15px] uppercase underline mb-2 sm:mb-3">
                   TRAUMA
                 </h2>
-                <p
-                  style={{
-                    fontFamily: 'Calibri, sans-serif',
-                    fontWeight: 300,
-                    fontStyle: 'normal',
-                    fontSize: { xs: '12px', sm: '13px', md: '14px' }, // Reduced for mobile
-                    lineHeight: { xs: 1.5, sm: 1.45, md: '1.45' },
-                    letterSpacing: { xs: '0.02em', md: '0%' },
-                    textTransform: 'capitalize',
-                    color: 'white',
-                    margin: 0,
-                    textAlign: 'left',
-                    maxWidth: '100%',
-                    wordBreak: 'break-word',
-                  }}
-                >
-                  Art Therapy Offers A Safe And Non-threatening Way To Process Traumatic Emotions Through Nonverbal Symbolic Expressions, Sensory Engagement, And Revisiting Experiences To Diminish Suffering
+                <p className="font-sans font-medium text-white text-[11px] sm:text-[12.5px] md:text-[13.5px] leading-[1.55] sm:leading-[1.45] opacity-90 text-justify">
+                  The remarkable value of art therapy in overpowering trauma has been proved. The process provides a safe and controlled environment where individuals can access and process traumatic emotions through nonverbal symbolic expressions. Sensory engagement facilitates the processing of blocked traumatic memories. A significant benefit for individuals comes from revisiting their experiences and viewing the visual artwork representing their trauma. The repetition of the auditory, verbal, and visual memories is crucial, as each review helps to fill in memory gaps, the processing and ultimately diminishing the related suffering.
                 </p>
               </div>
 
               {/* FATIGUE/PAIN/BURNOUT Section */}
               <div>
-                <h2
-                  style={{
-                    fontFamily: 'Calibri, sans-serif',
-                    fontWeight: 600,
-                    fontStyle: 'normal',
-                    fontSize: { xs: '14px', sm: '16px', md: '18px' },
-                    lineHeight: { xs: 1.4, sm: 1.3, md: '22px' },
-                    letterSpacing: { xs: '0.02em', md: '0%' },
-                    color: 'white',
-                    margin: 0,
-                    marginBottom: { xs: '0.3rem', sm: '0.5rem', md: '0.6rem' },
-                    textAlign: 'left',
-                    textDecoration: 'underline',
-                    textTransform: 'uppercase',
-                    maxWidth: '100%',
-                    wordBreak: 'break-word',
-                  }}
-                >
-                  FATIGUE/PAIN/BURNOUT
+                <h2 className="font-sans font-semibold text-white text-[13px] sm:text-[14px] md:text-[15px] uppercase underline mb-2 sm:mb-3">
+                  FATIGUE / PAIN / BURNOUT
                 </h2>
-                <p
-                  style={{
-                    fontFamily: 'Calibri, sans-serif',
-                    fontWeight: 300,
-                    fontStyle: 'normal',
-                    fontSize: { xs: '12px', sm: '13px', md: '14px' },
-                    lineHeight: { xs: 1.5, sm: 1.45, md: '1.45' },
-                    letterSpacing: { xs: '0.02em', md: '0%' },
-                    textTransform: 'capitalize',
-                    color: 'white',
-                    margin: 0,
-                    textAlign: 'left',
-                    maxWidth: '100%',
-                    wordBreak: 'break-word',
-                  }}
-                >
-                  Art Therapy Addresses Cultural And Language Barriers, Eating Disorders, Self-expression, Understanding Relationships, And Revealing Unconscious Conflicts Through Metaphorical Expressions
+                <p className="font-sans font-medium text-white text-[11px] sm:text-[12.5px] md:text-[13.5px] leading-[1.55] sm:leading-[1.45] opacity-90 text-justify">
+                  Art therapy can circumvent cultural and language-based barriers, addressing the root causes of eating disorders. For those struggling with disordered eating, art provides a safe medium for self-expression, and facilitating a deeper understanding of themselves, their relationships, and interactions with the world. Metaphorical expressions within art can reveal unconscious conflicts, such as the individual's simultaneous desire for safety through food and their conscious efforts to rationalize the behaviors.
                 </p>
               </div>
 
-              {/* Autism Spectrum Section */}
+              {/* AUTISM SPECTRUM Section */}
               <div>
-                <h2
-                  style={{
-                    fontFamily: 'Calibri, sans-serif',
-                    fontWeight: 600,
-                    fontStyle: 'normal',
-                    fontSize: { xs: '14px', sm: '16px', md: '18px' },
-                    lineHeight: { xs: 1.4, sm: 1.3, md: '22px' },
-                    letterSpacing: { xs: '0.02em', md: '0%' },
-                    color: 'white',
-                    margin: 0,
-                    marginBottom: { xs: '0.3rem', sm: '0.5rem', md: '0.6rem' },
-                    textAlign: 'left',
-                    textDecoration: 'underline',
-                    textTransform: 'capitalize',
-                    maxWidth: '100%',
-                    wordBreak: 'break-word',
-                  }}
-                >
+                <h2 className="font-sans font-semibold text-white text-[13px] sm:text-[14px] md:text-[15px] capitalize underline mb-2 sm:mb-3">
                   Autism Spectrum
                 </h2>
-                <p
-                  style={{
-                    fontFamily: 'Calibri, sans-serif',
-                    fontWeight: 300,
-                    fontStyle: 'normal',
-                    fontSize: { xs: '12px', sm: '13px', md: '14px' },
-                    lineHeight: { xs: 1.5, sm: 1.45, md: '1.45' },
-                    letterSpacing: { xs: '0.02em', md: '0%' },
-                    textTransform: 'capitalize',
-                    color: 'white',
-                    margin: 0,
-                    textAlign: 'left',
-                    maxWidth: '100%',
-                    wordBreak: 'break-word',
-                  }}
-                >
-                  Research On Creative Arts Interventions For Children With Autism Spectrum Disorder Highlights Improvements In Occupation-based Outcomes, Performance Skills, Social Interaction, Body Functions, And How Art Therapy Promotes Self-expression And Structured Freedom
+                <p className="font-sans font-medium text-white text-[11px] sm:text-[12.5px] md:text-[13.5px] leading-[1.55] sm:leading-[1.45] opacity-90 text-justify">
+                  Research on creative arts interventions for children with Autism Spectrum Disorder level one, reveals improvements in occupation-based outcomes, specifically in performance skills related to process and social interaction, as well as in body functions. Art Therapy promotes self-expression and structured freedom, but not avoidant and suppressive coping approaches which ultimately lead to anxiety and stress in this population.
                 </p>
               </div>
-            </motion.div>
-          </Box>
-        </Box>
+            </Motion.div>
+          </div>
+        </div>
 
         {/* Navigation Arrows */}
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            gap: { xs: '0.5rem', sm: '1rem', md: '1.25rem' }, // Reduced gap for mobile
-            marginTop: { xs: '0.5rem', sm: '1rem', md: 'auto' },
-            padding: { xs: '0.25rem', sm: '0.5rem', md: '0' },
-            maxWidth: '100%',
-            flexWrap: 'wrap',
-          }}
-        >
-          {/* Left Arrow Button - Dark Grey */}
-          <motion.div
+        <div className="flex justify-center items-center gap-3 sm:gap-5 md:gap-6 mt-8 md:mt-auto mb-5 sm:mb-4 md:mb-0">
+          {/* Left Arrow */}
+          <Motion.div
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => navigate('/choices-intro')}
-            style={{
-              width: { xs: '40px', sm: '48px', md: '58px' }, // Reduced for mobile
-              height: { xs: '40px', sm: '48px', md: '58px' },
-              background: 'linear-gradient(180deg, #0f3f25 0%, #021b0f 100%)',
-              border: '1px solid rgba(0, 170, 109, 0.8)',
-              borderRadius: '6px',
-              boxShadow: '0 6px 14px rgba(0, 0, 0, 0.45)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              cursor: 'pointer',
-            }}
+            className="w-9 sm:w-11 md:w-12 h-9 sm:h-11 md:h-12 bg-gradient-to-b from-green-900 to-green-950 border border-green-700/80 rounded-md shadow-md flex items-center justify-center cursor-pointer"
           >
-            <Box
-              component="img"
+            <img
               src={arrowIcon}
               alt="Back"
-              loading="lazy"
-              sx={{
-                width: { xs: '50%', sm: '52%', md: '52%' },
-                height: 'auto',
-                transform: 'scaleX(-1)',
-                filter: 'invert(1) brightness(1.15)',
-              }}
+              className="w-1/2 h-auto transform -scale-x-100 filter invert brightness-110"
             />
-          </motion.div>
+          </Motion.div>
 
-          {/* Right Arrow Button - Dark Green */}
-          <motion.div
+          {/* Right Arrow */}
+          <Motion.div
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            style={{
-              width: { xs: '40px', sm: '48px', md: '58px' },
-              height: { xs: '40px', sm: '48px', md: '58px' },
-              background: 'linear-gradient(180deg, #1c2428 0%, #080b0d 100%)',
-              border: '1px solid rgba(82, 96, 104, 0.75)',
-              borderRadius: '6px',
-              boxShadow: '0 6px 14px rgba(0, 0, 0, 0.45)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              cursor: 'pointer',
-            }}
+            onClick={() => navigate('/choices')}
+            className="w-9 sm:w-11 md:w-12 h-9 sm:h-11 md:h-12 bg-gradient-to-b from-gray-800 to-black border border-gray-500/70 rounded-md shadow-md flex items-center justify-center cursor-pointer"
           >
-            <Box
-              component="img"
+            <img
               src={arrowIcon}
               alt="Forward"
-              loading="lazy"
-              sx={{
-                width: { xs: '50%', sm: '52%', md: '52%' },
-                height: 'auto',
-                filter: 'invert(0.35) sepia(0) saturate(0) hue-rotate(0deg) brightness(0.85)',
-              }}
+              className="w-1/2 h-auto filter brightness-90 invert-[35%]"
             />
-          </motion.div>
-        </Box>
-      </Box>
-    </Box>
+          </Motion.div>
+        </div>
+      </div>
+    </div>
   )
 }
-
-export default ChoicesPage

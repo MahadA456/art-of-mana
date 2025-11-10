@@ -1,8 +1,12 @@
 import welcomeBg from '../assets/Welcome.png'
-import { Box } from '@mui/material'
+import { Box, useMediaQuery } from '@mui/material'
+import { useTheme } from '@mui/material/styles'
 import { motion as Motion } from 'framer-motion'
 
 function WelcomePage() {
+  const theme = useTheme()
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
+
   return (
     <Box
       sx={{
@@ -55,8 +59,10 @@ function WelcomePage() {
           maxWidth: '1000px',
           minHeight: { xs: '100%', md: '100%' }, // Allow content to grow on mobile
           padding: { xs: '2rem 1rem', sm: '3rem 2rem', md: '2rem' },
-          paddingTop: { xs: '40%', sm: '35%', md: '1%' },
-          paddingBottom: { xs: '2rem', md: '2rem' },
+          paddingTop: { xs: '55%', sm: '36%', md: '10%' },
+          paddingBottom: { xs: '3rem', md: '3rem' },
+          paddingLeft: { xs: '1.5rem', sm: '4rem', md: '18rem', lg: '24rem' },
+          paddingRight: { xs: '1.5rem', sm: '2.5rem', md: '4rem', lg: '6rem' },
           textAlign: 'start',
           position: 'relative',
           zIndex: 1,
@@ -91,8 +97,8 @@ function WelcomePage() {
           style={{
             display: 'flex',
             flexDirection: 'column',
-            gap: '0.5rem',
-            marginBottom: '2rem',
+            gap: '1.25rem',
+            marginBottom: '2.75rem',
           }}
         >
           <p
@@ -100,12 +106,13 @@ function WelcomePage() {
               fontFamily: 'Calibri, sans-serif',
               fontWeight: 400,
               fontStyle: 'normal',
-              fontSize: 'clamp(0.95rem, 3.4vw, 1.15rem)',
-              lineHeight: 1.55,
+              fontSize: 'clamp(0.75rem, 2.2vw, 0.95rem)',
+              lineHeight: 1.4,
               letterSpacing: '0%',
               textTransform: 'capitalize',
               color: 'white',
               margin: 0,
+              whiteSpace: isMobile ? 'normal' : 'nowrap',
             }}
           >
             Mana Of Arta Is A Sanctuary Space We Sculpt For Your Mind, Body And Spirit To Retune And Revive
@@ -115,12 +122,13 @@ function WelcomePage() {
               fontFamily: 'Calibri, sans-serif',
               fontWeight: 400,
               fontStyle: 'normal',
-              fontSize: 'clamp(0.95rem, 3.4vw, 1.15rem)',
-              lineHeight: 1.55,
+              fontSize: 'clamp(0.75rem, 2.2vw, 0.95rem)',
+              lineHeight: 1.4,
               letterSpacing: '0%',
               textTransform: 'capitalize',
               color: 'white',
               margin: 0,
+              whiteSpace: isMobile ? 'normal' : 'nowrap',
             }}
           >
             To Reveal Your True Power — Art And Nature
@@ -130,19 +138,28 @@ function WelcomePage() {
               fontFamily: 'Calibri, sans-serif',
               fontWeight: 400,
               fontStyle: 'normal',
-              fontSize: 'clamp(0.95rem, 3.4vw, 1.15rem)',
-              lineHeight: 1.55,
+              fontSize: 'clamp(0.75rem, 2.2vw, 0.95rem)',
+              lineHeight: 1.4,
               letterSpacing: '0%',
               textTransform: 'capitalize',
               color: 'white',
               margin: 0,
+              whiteSpace: isMobile ? 'normal' : 'nowrap',
             }}
           >
             We Are An Eco-Friendly, And Tech-Integrated Solution For Complex Psychological Needs Of Today's Global Citizens.
           </p>
         </Motion.div>
         </div>
-        <div className='flex flex-col align-center justify-center'>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: '100%',
+          }}
+        >
         {/* Last Text Line */}
         <Motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -152,13 +169,16 @@ function WelcomePage() {
             fontFamily: 'Calibri, sans-serif',
             fontWeight: 400,
             fontStyle: 'normal',
-            fontSize: 'clamp(0.95rem, 3.4vw, 1.15rem)',
-            lineHeight: 1.55,
+            fontSize: 'clamp(0.7rem, 2.2vw, 0.9rem)',
+            lineHeight: 1.4,
             letterSpacing: '0%',
             textTransform: 'capitalize',
             color: 'white',
-            margin: 0,
-            marginBottom: 'clamp(1rem, 4vw, 1.75rem)',
+            margin: '0',
+            marginRight: isMobile ? 0 : '10rem',
+            marginBottom: 'clamp(1.75rem, 4vw, 2.75rem)',
+            whiteSpace: isMobile ? 'normal' : 'nowrap',
+            textAlign: 'center',
           }}
         >
           A Routine For Psyche Detox & Self Hygiene For Mind
@@ -169,28 +189,34 @@ function WelcomePage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.97 }}
           onClick={() => {
-            // Add navigation or action here
+ 
           }}
+          className="text-black text-sm font-bold relative overflow-hidden group inline-flex items-center justify-center"
           style={{
-            backgroundColor: '#4CAF50',
-            color: 'black',
+            background: 'linear-gradient(90deg, #14F195, #63DB70)',
+            boxShadow: '0 4px 15px rgba(20, 241, 149, 0.3)',
+            width: 140,
+            height: 42,
             border: 'none',
-            borderRadius: '8px',
-            padding: '0.75rem 2rem',
-            fontSize: 'clamp(0.95rem, 3.2vw, 1.05rem)',
-            fontWeight: 500,
-            textAlign: 'center',
+            borderRadius: 3,
+            padding: '15px 27px',
             cursor: 'pointer',
             fontFamily: 'Calibri, sans-serif',
-            transition: 'all 0.3s ease',
-            width: 'fit-content',
-            margin: '0 auto',
+            margin: '0',
+            marginRight: isMobile ? 0 : '10rem',
           }}
         >
-          Learn More
+          <Motion.span className="relative z-10" whileHover={{ scale: 1.05 }}>
+            Learn More
+          </Motion.span>
+          <Motion.div
+            className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-20"
+            animate={{ x: ['-100%', '100%'] }}
+            transition={{ duration: 1.5, repeat: Infinity, repeatDelay: 3 }}
+          />
         </Motion.button>
         </div>
       </Box>
