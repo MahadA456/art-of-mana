@@ -93,7 +93,7 @@ export default function ChoicesPage() {
           <Motion.div
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            onClick={() => navigate('/choices')}
+            onClick={() => navigate('/philosophy')}
             className="w-9 sm:w-11 md:w-12 h-9 sm:h-11 md:h-12 bg-gradient-to-b from-gray-800 to-black border border-gray-500/70 rounded-md shadow-md flex items-center justify-center cursor-pointer"
           >
             <img
