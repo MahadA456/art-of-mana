@@ -28,7 +28,9 @@ export default function ChoicesPage() {
         <Motion.img
           src={choiceImage}
           alt="Choices"
-          loading="lazy"
+          loading="eager"
+          decoding="async"
+          fetchPriority="high"
           className="w-full h-full object-cover object-center"
           initial={{ scale: 1.1 }}
           animate={{ scale: 1 }}
@@ -178,7 +180,7 @@ export default function ChoicesPage() {
         </div>
 
         {/* Navigation Arrows */}
-        <div className="flex justify-center items-center gap-3 sm:gap-5 md:gap-6 mt-8 md:mt-auto mb-5 sm:mb-4 md:mb-0">
+        <div className="flex justify-center items-center gap-4 sm:gap-5 md:gap-6 mt-6 sm:mt-8 md:mt-auto mb-3 sm:mb-4 md:mb-0">
           {/* Left Arrow */}
           <Motion.img
             src={choicesBack}
@@ -186,7 +188,7 @@ export default function ChoicesPage() {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => navigate('/choices-intro')}
-            className="w-8 sm:w-10 md:w-12 h-auto cursor-pointer"
+            className="w-14 sm:w-10 md:w-12 h-auto cursor-pointer"
           />
 
           {/* Right Arrow */}
@@ -196,7 +198,7 @@ export default function ChoicesPage() {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => navigate('/philosophy')}
-            className="w-8 sm:w-10 md:w-12 h-auto cursor-pointer"
+            className="w-14 sm:w-10 md:w-12 h-auto cursor-pointer"
           />
         </div>
       </Motion.div>

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import emailjs from 'emailjs-com'
 import { motion as Motion } from 'framer-motion'
 import girlImage from '../assets/girl.png'
@@ -12,6 +12,30 @@ export default function ContactPage() {
   })
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState({ type: '', text: '' })
+  const [imagesLoaded, setImagesLoaded] = useState(false)
+
+  // Preload images for better performance
+  useEffect(() => {
+    const preloadImages = async () => {
+      const imagePromises = [
+        new Promise((resolve) => {
+          const img = new Image()
+          img.src = offeringsBg
+          img.onload = resolve
+          img.onerror = resolve
+        }),
+        new Promise((resolve) => {
+          const img = new Image()
+          img.src = girlImage
+          img.onload = resolve
+          img.onerror = resolve
+        })
+      ]
+      await Promise.all(imagePromises)
+      setImagesLoaded(true)
+    }
+    preloadImages()
+  }, [])
 
   // EmailJS configuration
   const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_k2pvvg3'
@@ -96,10 +120,12 @@ export default function ContactPage() {
         <Motion.img
           src={girlImage}
           alt="Contact"
-          loading="lazy"
+          loading="eager"
+          decoding="async"
+          fetchPriority="high"
           className="w-full h-full object-cover"
-          initial={{ scale: 1.1 }}
-          animate={{ scale: 1 }}
+          initial={{ scale: 1.1, opacity: 0 }}
+          animate={{ scale: 1, opacity: imagesLoaded ? 1 : 0 }}
           transition={{ duration: 0.8, ease: 'easeOut' }}
         />
         <Motion.div 
@@ -118,10 +144,11 @@ export default function ContactPage() {
       <Motion.div 
         className="relative w-full md:w-[64%] min-h-full md:min-h-full flex items-center justify-center px-5 md:px-10 py-8 bg-cover bg-center bg-no-repeat"
         style={{ 
-          backgroundImage: `url(${offeringsBg})`,
+          backgroundImage: imagesLoaded ? `url(${offeringsBg})` : 'none',
+          backgroundColor: imagesLoaded ? 'transparent' : '#000',
         }}
         initial={{ x: 50, opacity: 0 }}
-        animate={{ x: 0, opacity: 1 }}
+        animate={{ x: 0, opacity: imagesLoaded ? 1 : 0.8 }}
         transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
       >
         <Motion.form

@@ -1,9 +1,19 @@
 import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
 import offeringsBg from "../assets/Our Offerings.png";
 import clockIcon from "../assets/clock png.png";
 import chatIcon from "../assets/chat png.png";
 
 export default function OfferingsPage() {
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  // Preload background image
+  useEffect(() => {
+    const img = new Image();
+    img.src = offeringsBg;
+    img.onload = () => setImageLoaded(true);
+    img.onerror = () => setImageLoaded(true); // Still show content even if image fails
+  }, []);
   const individualPackages = [
     {
       title: "Single Sessions",
@@ -56,12 +66,13 @@ export default function OfferingsPage() {
     <motion.div
       className="w-screen h-screen fixed inset-0 flex flex-col overflow-y-auto bg-cover bg-center bg-no-repeat [&::-webkit-scrollbar]:hidden"
       style={{ 
-        backgroundImage: `url(${offeringsBg})`,
+        backgroundImage: imageLoaded ? `url(${offeringsBg})` : 'none',
+        backgroundColor: imageLoaded ? 'transparent' : '#000',
         scrollbarWidth: 'none',
         msOverflowStyle: 'none',
       }}
       initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
+      animate={{ opacity: imageLoaded ? 1 : 0.8 }}
       transition={{ duration: 0.8, ease: 'easeOut' }}
     >
       {/* Main Container */}

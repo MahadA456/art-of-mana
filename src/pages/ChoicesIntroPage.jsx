@@ -179,7 +179,7 @@ import { motion as Motion } from 'framer-motion'
           </div>
 
           {/* Navigation Arrows */}
-          <div className="flex justify-center items-center gap-3 sm:gap-5 md:gap-6 mt-8 md:mt-auto mb-5 sm:mb-4 md:mb-0">
+          <div className="flex justify-center items-center gap-4 sm:gap-5 md:gap-6 mt-6 sm:mt-8 md:mt-auto mb-3 sm:mb-4 md:mb-0">
             {/* Left Arrow */}
             <Motion.img
               src={introBack}
@@ -187,7 +187,7 @@ import { motion as Motion } from 'framer-motion'
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => navigate('/explore')}
-              className="w-8 sm:w-10 md:w-12 h-auto cursor-pointer"
+              className="w-14 sm:w-10 md:w-12 h-auto cursor-pointer"
             />
 
             {/* Right Arrow */}
@@ -197,7 +197,7 @@ import { motion as Motion } from 'framer-motion'
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => navigate('/choices')}
-              className="w-8 sm:w-10 md:w-12 h-auto cursor-pointer"
+              className="w-14 sm:w-10 md:w-12 h-auto cursor-pointer"
             />
           </div>
         </Motion.div>

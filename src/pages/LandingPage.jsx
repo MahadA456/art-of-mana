@@ -3,16 +3,70 @@ import backMana from '../assets/back_mana.jpg';
 import roundIcon from '../assets/round.png';
 import titleImage from '../assets/title.png';
 import { motion as Motion, useMotionValue, useTransform } from 'framer-motion';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 function LandingPage() {
   const navigate = useNavigate();
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
+  const [imagesLoaded, setImagesLoaded] = useState({
+    background: false,
+    roundIcon: false,
+    title: false,
+  });
 
   const handleMenuClick = () => {
     navigate('/menu');
   };
+
+  // Preload all images for better performance
+  useEffect(() => {
+    const preloadImages = async () => {
+      const imagePromises = [
+        // Background image (highest priority)
+        new Promise((resolve) => {
+          const img = new Image();
+          img.src = backMana;
+          img.loading = 'eager';
+          img.fetchPriority = 'high';
+          img.decoding = 'async';
+          img.onload = () => {
+            setImagesLoaded(prev => ({ ...prev, background: true }));
+            resolve();
+          };
+          img.onerror = resolve;
+        }),
+        // Round icon
+        new Promise((resolve) => {
+          const img = new Image();
+          img.src = roundIcon;
+          img.loading = 'eager';
+          img.fetchPriority = 'high';
+          img.decoding = 'async';
+          img.onload = () => {
+            setImagesLoaded(prev => ({ ...prev, roundIcon: true }));
+            resolve();
+          };
+          img.onerror = resolve;
+        }),
+        // Title image
+        new Promise((resolve) => {
+          const img = new Image();
+          img.src = titleImage;
+          img.loading = 'eager';
+          img.fetchPriority = 'high';
+          img.decoding = 'async';
+          img.onload = () => {
+            setImagesLoaded(prev => ({ ...prev, title: true }));
+            resolve();
+          };
+          img.onerror = resolve;
+        }),
+      ];
+      await Promise.all(imagePromises);
+    };
+    preloadImages();
+  }, []);
 
   useEffect(() => {
     const handleMouseMove = (e) => {
@@ -36,21 +90,23 @@ function LandingPage() {
     <Motion.div
       className="w-screen h-screen fixed inset-0 flex flex-col items-center bg-cover bg-center bg-no-repeat overflow-y-auto md:overflow-y-hidden m-0 p-0 box-border"
       style={{ 
-        backgroundImage: `url(${backMana})`,
+        backgroundImage: imagesLoaded.background ? `url(${backMana})` : 'none',
+        backgroundColor: imagesLoaded.background ? 'transparent' : '#000',
         scrollbarWidth: 'none', /* Firefox */
         msOverflowStyle: 'none', /* IE and Edge */
       }}
       role="main"
       aria-label="Landing Page"
       initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
+      animate={{ opacity: imagesLoaded.background ? 1 : 0.8 }}
       transition={{ duration: 0.8, ease: 'easeOut' }}
     >
       {/* Parallax Background Layer */}
       <Motion.div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{ 
-          backgroundImage: `url(${backMana})`,
+          backgroundImage: imagesLoaded.background ? `url(${backMana})` : 'none',
+          backgroundColor: imagesLoaded.background ? 'transparent' : '#000',
           x: backgroundX,
           y: backgroundY,
           scale: 1.1,
@@ -139,11 +195,13 @@ function LandingPage() {
           <Motion.img
             src={roundIcon}
             alt="Round Icon"
-            loading="lazy"
+            loading="eager"
+            decoding="async"
+            fetchPriority="high"
             className="relative w-[28vw] sm:w-[22vw] md:w-[15vw] lg:w-[12vw] max-w-[160px] sm:max-w-[140px] md:max-w-[150px] lg:max-w-[180px] h-auto mb-2 sm:mb-2 md:mb-4 lg:mb-6 object-contain drop-shadow-2xl"
             initial={{ opacity: 0, scale: 0.5, y: -30, rotate: -180 }}
             animate={{ 
-              opacity: 1, 
+              opacity: imagesLoaded.roundIcon ? 1 : 0, 
               scale: 1, 
               y: [0, -8, 0],
               rotate: 0,
@@ -181,11 +239,13 @@ function LandingPage() {
           <Motion.img
             src={titleImage}
             alt="MANA OF ARTA Title"
-            loading="lazy"
+            loading="eager"
+            decoding="async"
+            fetchPriority="high"
             className="w-[42vw] sm:w-[45vw] md:w-[40vw] lg:w-[35vw] max-w-[170px] sm:max-w-[220px] md:max-w-[300px] lg:max-w-[360px] h-auto object-contain drop-shadow-2xl"
             initial={{ opacity: 0, y: 30, scale: 0.9, filter: 'blur(10px)' }}
             animate={{ 
-              opacity: 1, 
+              opacity: imagesLoaded.title ? 1 : 0, 
               y: 0, 
               scale: 1,
               filter: 'blur(0px)',

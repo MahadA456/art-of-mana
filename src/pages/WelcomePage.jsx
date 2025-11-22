@@ -13,38 +13,51 @@ function WelcomePage() {
       setIsMobile(window.innerWidth < 768)
     }
     checkMobile()
-    window.addEventListener('resize', checkMobile)
-    return () => window.removeEventListener('resize', checkMobile)
+    // Debounce resize for better performance
+    let timeoutId
+    const handleResize = () => {
+      clearTimeout(timeoutId)
+      timeoutId = setTimeout(checkMobile, 150)
+    }
+    window.addEventListener('resize', handleResize)
+    return () => {
+      window.removeEventListener('resize', handleResize)
+      clearTimeout(timeoutId)
+    }
   }, [])
 
-  // Preload background image
+  // Preload background image with better optimization
   useEffect(() => {
     const img = new Image()
     img.src = welcomeBg
+    img.loading = 'eager'
+    img.fetchPriority = 'high'
+    img.decoding = 'async'
     img.onload = () => {
       setImageLoaded(true)
     }
     img.onerror = () => {
       setImageLoaded(true) // Still show content even if image fails
     }
+    // Cleanup
+    return () => {
+      img.onload = null
+      img.onerror = null
+    }
   }, [])
   return (
     <Motion.div
-      className="relative w-screen h-screen fixed inset-0 flex flex-col items-center justify-between overflow-y-auto bg-cover bg-center bg-no-repeat bg-scroll md:bg-fixed"
+      className="relative w-screen h-screen fixed inset-0 flex flex-col items-center justify-between overflow-y-auto bg-cover bg-center bg-no-repeat bg-scroll md:bg-fixed [&::-webkit-scrollbar]:hidden"
       style={{ 
-        backgroundImage: `url(${welcomeBg})`,
+        backgroundImage: imageLoaded ? `url(${welcomeBg})` : 'none',
+        backgroundColor: imageLoaded ? 'transparent' : '#000',
+        scrollbarWidth: 'none',
+        msOverflowStyle: 'none',
       }}
       initial={{ opacity: 0 }}
-      animate={{ opacity: imageLoaded ? 1 : 0 }}
+      animate={{ opacity: imageLoaded ? 1 : 0.8 }}
       transition={{ duration: 0.8, ease: 'easeOut' }}
     >
-      {/* Hidden preload image */}
-      <img 
-        src={welcomeBg} 
-        alt="" 
-        style={{ display: 'none' }} 
-        onLoad={() => setImageLoaded(true)}
-      />
       
       {/* Animated Background Overlay */}
       <Motion.div 
