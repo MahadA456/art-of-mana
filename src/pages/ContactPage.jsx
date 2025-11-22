@@ -2,6 +2,7 @@ import { useState } from 'react'
 import emailjs from 'emailjs-com'
 import { motion as Motion } from 'framer-motion'
 import girlImage from '../assets/girl.png'
+import offeringsBg from '../assets/Our Offerings.png'
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -13,9 +14,9 @@ export default function ContactPage() {
   const [message, setMessage] = useState({ type: '', text: '' })
 
   // EmailJS configuration
-  const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'YOUR_SERVICE_ID'
-  const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'YOUR_TEMPLATE_ID'
-  const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'YOUR_PUBLIC_KEY'
+  const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_k2pvvg3'
+  const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_6u62zx9'
+  const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || '7izHhrSNJab1ArBqF'
 
   const handleChange = (e) => {
     setFormData({
@@ -66,88 +67,269 @@ export default function ContactPage() {
   }
 
   return (
-    <div className="w-screen h-screen fixed top-0 left-0 flex flex-col md:flex-row overflow-y-auto bg-black text-white">
-      {/* Left Image Section */}
-      <div className="relative w-full md:w-[36%] h-[35%] sm:h-[38%] md:h-full overflow-hidden">
-        <img
+    <>
+      <style>{`
+        .contact-input::placeholder {
+          color: rgba(255, 255, 255, 0.6);
+        }
+        .contact-input:focus {
+          border-color: rgba(255, 255, 255, 0.4);
+        }
+      `}</style>
+      <Motion.div 
+        className="w-screen h-screen fixed top-0 left-0 flex flex-col md:flex-row overflow-y-auto bg-black text-white [&::-webkit-scrollbar]:hidden"
+        style={{
+          scrollbarWidth: 'none',
+          msOverflowStyle: 'none',
+        }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8, ease: 'easeOut' }}
+      >
+      {/* Left Image Section - Hidden on mobile */}
+      <Motion.div 
+        className="hidden md:block relative w-full md:w-[36%] h-full overflow-hidden"
+        initial={{ x: -50, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={{ duration: 0.8, ease: 'easeOut' }}
+      >
+        <Motion.img
           src={girlImage}
           alt="Contact"
           loading="lazy"
           className="w-full h-full object-cover"
+          initial={{ scale: 1.1 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
         />
-        <div className="absolute inset-0 bg-black/50" />
-      </div>
+        <Motion.div 
+          className="absolute inset-0 bg-black/50"
+          animate={{ opacity: [0.5, 0.6, 0.5] }}
+          transition={{ 
+            duration: 3, 
+            ease: 'easeInOut',
+            repeat: Infinity,
+            repeatType: 'reverse'
+          }}
+        />
+      </Motion.div>
 
-      {/* Right Section - Contact Form */}
-      <div className="relative w-full md:w-[64%] min-h-[65%] sm:min-h-[62%] md:min-h-full bg-[radial-gradient(circle_at_25%_25%,rgba(0,160,100,0.2)_0%,rgba(0,0,0,0.95)_45%)] flex items-center justify-center px-5 md:px-10 py-8">
+      {/* Right Section - Contact Form with Offerings Background */}
+      <Motion.div 
+        className="relative w-full md:w-[64%] min-h-full md:min-h-full flex items-center justify-center px-5 md:px-10 py-8 bg-cover bg-center bg-no-repeat"
+        style={{ 
+          backgroundImage: `url(${offeringsBg})`,
+        }}
+        initial={{ x: 50, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
+      >
         <Motion.form
           onSubmit={handleSubmit}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          initial={{ opacity: 0, y: 30, filter: 'blur(10px)' }}
+          animate={{ 
+            opacity: 1, 
+            y: 0,
+            filter: 'blur(0px)'
+          }}
+          transition={{ 
+            duration: 0.8,
+            delay: 0.4,
+            ease: [0.25, 0.46, 0.45, 0.94]
+          }}
           className="flex flex-col w-full max-w-sm md:max-w-md px-1 md:px-0"
         >
           {/* Title */}
-          <h1 className="text-3xl md:text-4xl font-bold text-white mb-1">Contact</h1>
-          <p className="text-green-400 text-sm md:text-base leading-snug mb-1">Time to Reveal Your True Power</p>
-          <p className="text-green-400 text-sm md:text-base mb-6">Mana Of Arta</p>
+          <Motion.h1 
+            className="text-3xl md:text-4xl font-bold text-white mb-1"
+            initial={{ opacity: 0, x: -20, filter: 'blur(5px)' }}
+            animate={{ 
+              opacity: 1, 
+              x: 0,
+              filter: 'blur(0px)'
+            }}
+            transition={{ 
+              duration: 0.7,
+              delay: 0.5,
+              ease: 'easeOut'
+            }}
+            whileHover={{
+              scale: 1.05,
+              transition: { duration: 0.3 }
+            }}
+          >
+            Contact
+          </Motion.h1>
+          <Motion.p 
+            className="text-green-400 text-sm md:text-base leading-snug mb-1"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+          >
+            Time to Reveal Your True Power
+          </Motion.p>
+          <Motion.p 
+            className="text-green-400 text-sm md:text-base mb-6"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.7 }}
+          >
+            Mana Of Arta
+          </Motion.p>
 
           {/* Message Alert */}
           {message.text && (
-            <div
+            <Motion.div
               className={`text-sm text-center px-3 py-2 mb-4 rounded-md ${
                 message.type === 'success' ? 'bg-green-500/80' : 'bg-red-500/80'
               }`}
+              initial={{ opacity: 0, scale: 0.9, y: -10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ duration: 0.4 }}
             >
               {message.text}
-            </div>
+            </Motion.div>
           )}
 
           {/* Input Fields */}
-          <input
-            type="text"
-            name="fullName"
-            placeholder="Full Name"
-            value={formData.fullName}
-            onChange={handleChange}
-            disabled={loading}
-            className="w-full bg-[#101010]/90 text-white placeholder-white/70 border border-[#333] rounded-lg px-3 py-3 mb-3 focus:border-green-500 outline-none transition-all text-sm"
-          />
-          <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            value={formData.email}
-            onChange={handleChange}
-            disabled={loading}
-            className="w-full bg-[#101010]/90 text-white placeholder-white/70 border border-[#333] rounded-lg px-3 py-3 mb-3 focus:border-green-500 outline-none transition-all text-sm"
-          />
-          <input
-            type="tel"
-            name="phoneNumber"
-            placeholder="Phone Number"
-            value={formData.phoneNumber}
-            onChange={handleChange}
-            disabled={loading}
-            className="w-full bg-[#101010]/90 text-white placeholder-white/70 border border-[#333] rounded-lg px-3 py-3 mb-5 focus:border-green-500 outline-none transition-all text-sm"
-          />
+          <Motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.8 }}
+          >
+            <input
+              type="text"
+              name="fullName"
+              placeholder="Full Name"
+              value={formData.fullName}
+              onChange={handleChange}
+              disabled={loading}
+              className="w-full text-white outline-none transition-all text-sm mb-3 contact-input"
+              style={{
+                backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                border: '1px solid rgba(255, 255, 255, 0.2)',
+                borderRadius: '4px',
+                padding: '12px 14px',
+                height: '41px',
+                fontFamily: 'Calibri, sans-serif',
+              }}
+            />
+          </Motion.div>
+          <Motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.9 }}
+          >
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={formData.email}
+              onChange={handleChange}
+              disabled={loading}
+              className="w-full text-white outline-none transition-all text-sm mb-3 contact-input"
+              style={{
+                backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                border: '1px solid rgba(255, 255, 255, 0.2)',
+                borderRadius: '4px',
+                padding: '12px 14px',
+                height: '41px',
+                fontFamily: 'Calibri, sans-serif',
+              }}
+            />
+          </Motion.div>
+          <Motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 1.0 }}
+          >
+            <input
+              type="tel"
+              name="phoneNumber"
+              placeholder="Phone Number"
+              value={formData.phoneNumber}
+              onChange={handleChange}
+              disabled={loading}
+              className="w-full text-white outline-none transition-all text-sm mb-5 contact-input"
+              style={{
+                backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                border: '1px solid rgba(255, 255, 255, 0.2)',
+                borderRadius: '4px',
+                padding: '12px 14px',
+                height: '41px',
+                fontFamily: 'Calibri, sans-serif',
+              }}
+            />
+          </Motion.div>
 
           {/* Submit Button */}
           <Motion.button
             type="submit"
             disabled={loading}
-            whileHover={!loading ? { scale: 1.03 } : {}}
-            whileTap={!loading ? { scale: 0.97 } : {}}
-            className={`w-full text-center rounded-lg font-semibold uppercase tracking-wider py-3 transition-all duration-300 ${
-              loading
-                ? 'bg-gray-600 cursor-not-allowed opacity-70'
-                : 'bg-gradient-to-r from-green-500 to-green-400 hover:shadow-[0_0_15px_rgba(0,255,100,0.4)]'
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 1.1 }}
+            whileTap={!loading ? { scale: 0.95 } : {}}
+            className={`text-black text-sm font-bold relative overflow-hidden group inline-flex items-center justify-center w-full ${
+              loading ? 'cursor-not-allowed opacity-70' : ''
             }`}
+            style={{
+              background: loading 
+                ? '#4B5563' 
+                : 'linear-gradient(90deg, #14F195, #63DB70)',
+              boxShadow: loading 
+                ? 'none' 
+                : '0 4px 15px rgba(20, 241, 149, 0.3)',
+              height: 42,
+              border: 'none',
+              borderRadius: 3,
+              padding: '15px 27px',
+              cursor: loading ? 'not-allowed' : 'pointer',
+              fontFamily: 'Calibri, sans-serif',
+              margin: '0',
+            }}
           >
-            {loading ? 'SENDING...' : 'SUBMIT'}
+            {/* Shimmer effect */}
+            {!loading && (
+              <Motion.div
+                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
+                animate={{
+                  x: ['-200%', '200%'],
+                  opacity: [0, 0.5, 0],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  repeatDelay: 2,
+                  ease: 'easeInOut',
+                }}
+              />
+            )}
+            <Motion.span 
+              className="relative z-10 uppercase tracking-wider" 
+              whileHover={!loading ? { scale: 1.05 } : {}}
+              style={{ textShadow: '0 1px 3px rgba(0, 0, 0, 0.2)' }}
+            >
+              {loading ? 'SENDING...' : 'SUBMIT'}
+            </Motion.span>
+            {/* Pulsing glow on hover */}
+            {!loading && (
+              <Motion.div
+                className="absolute inset-0 rounded-sm bg-white/20 opacity-0 group-hover:opacity-100 blur-md"
+                animate={{
+                  scale: [1, 1.2, 1],
+                }}
+                transition={{
+                  duration: 1.5,
+                  ease: 'easeInOut',
+                  repeat: Infinity,
+                }}
+              />
+            )}
           </Motion.button>
         </Motion.form>
-      </div>
-    </div>
+      </Motion.div>
+    </Motion.div>
+    </>
   )
 }

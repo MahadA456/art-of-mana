@@ -53,32 +53,68 @@ export default function OfferingsPage() {
   ];
 
   return (
-    <div
-      className="w-screen h-screen fixed inset-0 flex flex-col overflow-y-auto bg-cover bg-center bg-no-repeat"
-      style={{ backgroundImage: `url(${offeringsBg})` }}
+    <motion.div
+      className="w-screen h-screen fixed inset-0 flex flex-col overflow-y-auto bg-cover bg-center bg-no-repeat [&::-webkit-scrollbar]:hidden"
+      style={{ 
+        backgroundImage: `url(${offeringsBg})`,
+        scrollbarWidth: 'none',
+        msOverflowStyle: 'none',
+      }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.8, ease: 'easeOut' }}
     >
       {/* Main Container */}
-      <div className="flex flex-col w-full min-h-full px-4 sm:px-6 md:px-10 py-6 md:py-14 font-[Calibri] text-white">
-        {/* Header */}
+      <div className="flex flex-col w-full px-4 sm:px-6 md:px-10 pt-6 pb-4 sm:pt-6 sm:pb-6 md:pt-14 md:pb-14 font-[Calibri] text-white">
+        {/* Header - Above Cards */}
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
+          initial={{ opacity: 0, y: -30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="flex flex-col items-center text-center"
+          transition={{ duration: 0.8, ease: 'easeOut' }}
+          className="flex flex-col items-center text-center mb-8 sm:mb-10 md:mb-12"
         >
-          <h1 className="font-bold text-2xl sm:text-3xl md:text-5xl mb-2">
+          <motion.h1 
+            className="font-bold text-2xl sm:text-3xl md:text-4xl mb-3 sm:mb-4" 
+            style={{ fontFamily: 'Calibri, sans-serif' }}
+            initial={{ opacity: 0, y: -20, filter: 'blur(10px)' }}
+            animate={{ 
+              opacity: 1, 
+              y: 0,
+              filter: 'blur(0px)'
+            }}
+            transition={{ 
+              duration: 1,
+              delay: 0.2,
+              ease: [0.25, 0.46, 0.45, 0.94]
+            }}
+            whileHover={{
+              scale: 1.05,
+              transition: { duration: 0.3 }
+            }}
+          >
             Our Offerings
-          </h1>
-          <p className="text-[12px] sm:text-[14px] md:text-[17px] leading-relaxed max-w-3xl text-center mb-8">
-            You are a striking blend of art and nature, walking a unique
-            experience in life. We strive to meet your needs, expectations,
-            budget and time. If the standard offerings are not suitable, talk to
-            us!
-          </p>
+          </motion.h1>
+          <motion.p 
+            className="text-[12px] sm:text-[14px] md:text-[17px] leading-relaxed max-w-3xl text-center md:font-light" 
+            style={{ fontFamily: 'Calibri, sans-serif' }}
+            initial={{ opacity: 0, y: 20, filter: 'blur(5px)' }}
+            animate={{ 
+              opacity: 1, 
+              y: 0,
+              filter: 'blur(0px)'
+            }}
+            transition={{ 
+              duration: 0.8,
+              delay: 0.4,
+              ease: 'easeOut'
+            }}
+          >
+            You are a striking blend of art and nature, walking a unique experience in life. We strive to meet your needs, expectations, budget and time. If the standard offerings are not suitable, talk to us!
+          </motion.p>
         </motion.div>
 
-        {/* Offerings Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8 max-w-5xl mx-auto w-full">
+        {/* Offerings Grid - Below Header */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8 max-w-5xl mx-auto w-full pb-0 sm:pb-0 md:pb-0">
           {[
             {
               title: "Individual Packages (Virtual)",
@@ -98,60 +134,105 @@ export default function OfferingsPage() {
               transition={{ duration: 0.6, delay: section.delay }}
               className="flex flex-col gap-3 sm:gap-4"
             >
-              <h2 className="text-lg sm:text-xl md:text-2xl font-semibold underline underline-offset-4 text-center sm:text-left">
+              <motion.h2 
+                className="text-lg sm:text-xl md:text-2xl font-semibold underline underline-offset-4 text-left" 
+                style={{ fontFamily: 'Calibri, sans-serif' }}
+                initial={{ opacity: 0, x: -30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ 
+                  duration: 0.7,
+                  delay: section.delay + 0.2,
+                  ease: 'easeOut'
+                }}
+                whileHover={{
+                  scale: 1.05,
+                  x: 5,
+                  transition: { duration: 0.3 }
+                }}
+              >
                 {section.title}
-              </h2>
+              </motion.h2>
 
               <div className="flex flex-col gap-3 sm:gap-4">
                 {section.items.map((pkg, index) => (
                   <motion.div
                     key={pkg.title}
-                    initial={{ opacity: 0, scale: 0.96 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{
-                      duration: 0.4,
-                      delay: 0.35 + index * 0.08 + sectionIndex * 0.12,
+                    initial={{ opacity: 0, scale: 0.9, y: 20, filter: 'blur(5px)' }}
+                    animate={{ 
+                      opacity: 1, 
+                      scale: 1,
+                      y: 0,
+                      filter: 'blur(0px)'
                     }}
-                    whileHover={{ scale: 1.02 }}
-                    className={`flex flex-col gap-2 p-3 sm:p-4 md:p-5 rounded-xl border transition-all duration-300 ${
+                    transition={{
+                      duration: 0.6,
+                      delay: 0.5 + index * 0.1 + sectionIndex * 0.15,
+                      ease: [0.25, 0.46, 0.45, 0.94]
+                    }}
+                    whileHover={{ 
+                      scale: 1.03,
+                      y: -5,
+                      transition: { duration: 0.3 }
+                    }}
+                    className={`flex flex-col gap-2 p-3 sm:p-4 md:p-5 rounded-xl border transition-all duration-300 border-[#2b2b2b] md:hover:border-[#00d4aa] ${
                       pkg.highlighted
-                        ? "border-[#00d4aa] shadow-[0_6px_16px_rgba(0,212,170,0.18)]"
-                        : "border-[#2b2b2b]"
-                    } bg-black/70`}
+                        ? "md:hover:shadow-[0_6px_16px_rgba(0,212,170,0.18)]"
+                        : ""
+                    } bg-transparent md:bg-transparent`}
                   >
-                    <div className="flex justify-between items-center">
-                      <h3 className="font-medium text-base sm:text-lg md:text-xl">
+                    <motion.div 
+                      className="flex justify-between items-center"
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.5, delay: 0.6 + index * 0.1 + sectionIndex * 0.15 }}
+                    >
+                      <h3 className="font-medium text-base sm:text-lg md:text-xl" style={{ fontFamily: 'Calibri, sans-serif' }}>
                         {pkg.title}
                       </h3>
-                      <span className="font-medium text-base sm:text-lg md:text-xl">
+                      <span className="font-medium text-base sm:text-lg md:text-xl" style={{ fontFamily: 'Calibri, sans-serif' }}>
                         {pkg.price}
                       </span>
-                    </div>
+                    </motion.div>
 
-                    <div className="flex flex-col gap-2">
-                      <div className="flex items-center gap-2">
-                        <img
+                    <motion.div 
+                      className="flex flex-col gap-2"
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: 0.7 + index * 0.1 + sectionIndex * 0.15 }}
+                    >
+                      <motion.div 
+                        className="flex items-center gap-2"
+                        whileHover={{ x: 3, transition: { duration: 0.2 } }}
+                      >
+                        <motion.img
                           src={clockIcon}
                           alt="Clock"
                           className="w-4 sm:w-5 h-auto"
                           loading="lazy"
+                          whileHover={{ rotate: 15, scale: 1.1 }}
+                          transition={{ duration: 0.3 }}
                         />
-                        <span className="font-light text-[12px] sm:text-[13px] md:text-[15px] text-gray-200">
+                        <span className="font-light text-[12px] sm:text-[13px] md:text-[15px] text-gray-200" style={{ fontFamily: 'Calibri, sans-serif' }}>
                           {pkg.duration}
                         </span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <img
+                      </motion.div>
+                      <motion.div 
+                        className="flex items-center gap-2"
+                        whileHover={{ x: 3, transition: { duration: 0.2 } }}
+                      >
+                        <motion.img
                           src={chatIcon}
                           alt="Chat"
                           className="w-4 sm:w-5 h-auto"
                           loading="lazy"
+                          whileHover={{ rotate: -15, scale: 1.1 }}
+                          transition={{ duration: 0.3 }}
                         />
-                        <span className="font-light text-[12px] sm:text-[13px] md:text-[15px] text-gray-200">
+                        <span className="font-light text-[12px] sm:text-[13px] md:text-[15px] text-gray-200" style={{ fontFamily: 'Calibri, sans-serif' }}>
                           {pkg.intro}
                         </span>
-                      </div>
-                    </div>
+                      </motion.div>
+                    </motion.div>
                   </motion.div>
                 ))}
               </div>
@@ -159,6 +240,6 @@ export default function OfferingsPage() {
           ))}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
