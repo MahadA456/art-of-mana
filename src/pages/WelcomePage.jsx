@@ -109,7 +109,13 @@ function WelcomePage() {
         />
       ))}
 
-      <div className="relative z-10 flex flex-col items-center justify-between w-full max-w-[1000px] min-h-full px-6 sm:px-8 md:px-8 lg:px-24 pt-[55%] sm:pt-[36%] md:pt-[5%] pb-12 md:pb-12 pl-6 sm:pl-16 md:pl-48 lg:pl-64 pr-6 sm:pr-10 md:pr-16 lg:pr-24">
+      <div
+        className="relative z-10 flex flex-col items-center justify-between w-full max-w-[1000px] min-h-full px-6 sm:px-8 md:px-8 lg:px-24 pt-[55%] sm:pt-[36%] md:pt-[5%] pb-12 md:pb-12 pl-6 sm:pl-16 md:pl-48 lg:pl-64 pr-6 sm:pr-10 md:pr-16 lg:pr-24"
+        style={{
+          paddingTop: isMobile ? '35%' : undefined,
+          transform: isMobile ? 'translateY(-35px)' : 'none',
+        }}
+      >
         <div className="w-full text-left">
           <Motion.h1
             initial={{ opacity: 0, y: -30, scale: 0.9, filter: 'blur(10px)' }}
@@ -207,7 +213,7 @@ function WelcomePage() {
               fontFamily: 'Calibri, sans-serif',
               margin: '0',
               marginRight: isMobile ? 0 : '10rem',
-              marginBottom: 'clamp(1.75rem, 4vw, 2.75rem)',
+              marginBottom: isMobile ? '1.25rem' : 'clamp(1.75rem, 4vw, 2.75rem)',
               textShadow: '0 2px 15px rgba(255, 255, 255, 0.2)',
             }}
           >
@@ -246,6 +252,7 @@ function WelcomePage() {
               fontFamily: 'Calibri, sans-serif',
               margin: '0',
               marginRight: isMobile ? 0 : '10rem',
+              marginTop: isMobile ? '0.25rem' : 0,
             }}
           >
             {/* Glow effect */}
