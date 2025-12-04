@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import emailjs from 'emailjs-com'
 import { motion as Motion } from 'framer-motion'
 import girlImage from '../assets/girl.png'
 import offeringsBg from '../assets/Our Offerings.png'
@@ -37,10 +36,8 @@ export default function ContactPage() {
     preloadImages()
   }, [])
 
-  // EmailJS configuration
-  const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_k2pvvg3'
-  const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_6u62zx9'
-  const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || '7izHhrSNJab1ArBqF'
+  // Web3Forms configuration - Get your access key from https://web3forms.com
+  const WEB3FORMS_ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || ''
 
   const handleChange = (e) => {
     setFormData({
@@ -65,22 +62,48 @@ export default function ContactPage() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     if (!validateForm()) return
+    
+    if (!WEB3FORMS_ACCESS_KEY) {
+      setMessage({
+        type: 'error',
+        text: 'Form configuration error. Please contact the administrator.',
+      })
+      return
+    }
+
     setLoading(true)
     setMessage({ type: '', text: '' })
 
     try {
-      const templateParams = {
-        from_name: formData.fullName,
-        from_email: formData.email,
-        phone_number: formData.phoneNumber,
-        to_name: 'Mana Of Arta',
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_ACCESS_KEY,
+          name: formData.fullName,
+          email: formData.email,
+          phone: formData.phoneNumber,
+          subject: 'New Contact Form Submission - Art of Mana',
+          from_name: 'Art of Mana Contact Form',
+        }),
+      })
+
+      const data = await response.json()
+
+      if (!data.success) {
+        throw new Error(data.message || 'Failed to send message')
       }
 
-      await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY)
-      setMessage({ type: 'success', text: 'Thank you! Your message has been sent successfully.' })
+      setMessage({
+        type: 'success',
+        text: 'Thank you! Your message has been sent successfully.',
+      })
       setFormData({ fullName: '', email: '', phoneNumber: '' })
     } catch (error) {
-      console.error('EmailJS Error:', error)
+      console.error('Contact form error:', error)
       setMessage({
         type: 'error',
         text: 'Failed to send message. Please try again later or contact us directly.',
