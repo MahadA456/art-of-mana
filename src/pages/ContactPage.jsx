@@ -88,6 +88,10 @@ export default function ContactPage() {
           phone: formData.phoneNumber,
           subject: 'New Contact Form Submission - Art of Mana',
           from_name: 'Art of Mana Contact Form',
+          // Auto-reply configuration
+          auto_reply: true,
+          auto_reply_message: `Dear ${formData.fullName},\n\nThank you for contacting Art of Mana - Mana Of Arta!\n\nWe have received your message and will get back to you soon.\n\nTime to Reveal Your True Power.\n\nBest regards,\nMana Of Arta Team`,
+          auto_reply_subject: 'Thank you for contacting Art of Mana',
         }),
       })
 
