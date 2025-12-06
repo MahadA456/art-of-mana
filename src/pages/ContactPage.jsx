@@ -107,7 +107,7 @@ export default function ContactPage() {
 
       setMessage({
         type: 'success',
-        text: 'Thank you! Your message has been sent successfully.',
+        text: 'We are excited to receive your email. You will hear back from us very soon.',
       })
       setFormData({ fullName: '', email: '', phoneNumber: '' })
     } catch (error) {
