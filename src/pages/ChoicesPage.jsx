@@ -45,7 +45,7 @@ export default function ChoicesPage() {
         />
         {/* Dim Overlay - Very subtle */}
         <Motion.div 
-          className="absolute inset-0 bg-black/10 md:bg-black/15 z-0"
+          className="absolute inset-0 bg-black/30 md:bg-black/40 z-0"
         />
       </Motion.div>
 
