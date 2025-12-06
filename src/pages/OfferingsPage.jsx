@@ -1,19 +1,26 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
-import offeringsBg from "../assets/Our Offerings.png";
+import { getCloudinaryImage } from '../utils/cloudinary';
 import clockIcon from "../assets/clock png.png";
 import chatIcon from "../assets/chat png.png";
 
 export default function OfferingsPage() {
   const [imageLoaded, setImageLoaded] = useState(false);
 
+  // Get optimized image from Cloudinary
+  const offeringsImage = getCloudinaryImage('offerings.png', {
+    width: 1920,
+    quality: 'auto',
+    format: 'auto'
+  });
+
   // Preload background image
   useEffect(() => {
     const img = new Image();
-    img.src = offeringsBg;
+    img.src = offeringsImage;
     img.onload = () => setImageLoaded(true);
     img.onerror = () => setImageLoaded(true); // Still show content even if image fails
-  }, []);
+  }, [offeringsImage]);
   const individualPackages = [
     {
       title: "Single Sessions",
@@ -66,7 +73,7 @@ export default function OfferingsPage() {
     <motion.div
       className="w-screen h-screen fixed inset-0 flex flex-col overflow-y-auto bg-cover bg-center bg-no-repeat [&::-webkit-scrollbar]:hidden"
       style={{ 
-        backgroundImage: imageLoaded ? `url(${offeringsBg})` : 'none',
+        backgroundImage: imageLoaded ? `url(${offeringsImage})` : 'none',
         backgroundColor: imageLoaded ? 'transparent' : '#000',
         scrollbarWidth: 'none',
         msOverflowStyle: 'none',
