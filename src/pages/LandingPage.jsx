@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import backMana from '../assets/back_mana.jpg';
+import { getCloudinaryImage } from '../utils/cloudinary';
 import roundIcon from '../assets/round.png';
 import titleImage from '../assets/title.png';
 import { motion as Motion, useMotionValue, useTransform } from 'framer-motion';
@@ -13,6 +13,13 @@ function LandingPage() {
     background: false,
     roundIcon: false,
     title: false,
+  });
+
+  // Get optimized image from Cloudinary
+  const backMana = getCloudinaryImage('first.jpg', {
+    width: 1920,
+    quality: 'auto',
+    format: 'auto'
   });
 
   const handleMenuClick = () => {
@@ -66,7 +73,7 @@ function LandingPage() {
       await Promise.all(imagePromises);
     };
     preloadImages();
-  }, []);
+  }, [backMana]);
 
   useEffect(() => {
     const handleMouseMove = (e) => {

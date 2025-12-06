@@ -1,12 +1,19 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import welcomeBg from '../assets/Welcome.png'
+import { getCloudinaryImage } from '../utils/cloudinary'
 import { motion as Motion } from 'framer-motion'
 
 function WelcomePage() {
   const navigate = useNavigate()
   const [isMobile, setIsMobile] = useState(false)
   const [imageLoaded, setImageLoaded] = useState(false)
+  
+  // Get optimized image from Cloudinary
+  const welcomeBg = getCloudinaryImage('welcome.png', {
+    width: 1920,
+    quality: 'auto',
+    format: 'auto'
+  })
 
   useEffect(() => {
     const checkMobile = () => {
@@ -44,7 +51,7 @@ function WelcomePage() {
       img.onload = null
       img.onerror = null
     }
-  }, [])
+  }, [welcomeBg])
   return (
     <Motion.div
       className="relative w-screen h-screen fixed inset-0 flex flex-col items-center justify-between overflow-y-auto bg-cover bg-center bg-no-repeat bg-scroll md:bg-fixed [&::-webkit-scrollbar]:hidden"
@@ -84,6 +91,14 @@ function WelcomePage() {
           repeat: Infinity,
           repeatType: 'reverse',
         }}
+      />
+
+      {/* Left to Right Light Opacity Gradient Overlay */}
+      <Motion.div
+        className="absolute inset-0 bg-gradient-to-l from-transparent to-black/80"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8, delay: 0.3 }}
       />
 
       {/* Floating Particles Effect */}

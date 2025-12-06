@@ -1,7 +1,14 @@
 import { motion } from "framer-motion";
-import philosophyImage from "../assets/philosphy.jpg";
+import { getCloudinaryImage } from '../utils/cloudinary';
 
 export default function PhilosophyPage() {
+  // Get optimized image from Cloudinary
+  const philosophyImage = getCloudinaryImage('philosphy.png', {
+    width: 1920,
+    quality: 'auto',
+    format: 'auto'
+  })
+  
   return (
     <motion.div 
       className="w-screen h-screen fixed top-0 left-0 flex flex-col md:flex-row bg-black overflow-y-auto md:overflow-y-auto m-0 p-0 box-border [&::-webkit-scrollbar]:hidden"
@@ -39,16 +46,9 @@ export default function PhilosophyPage() {
             transition: { duration: 0.5 }
           }}
         />
-        {/* Dim Overlay - Mobile: darker, Desktop: lighter */}
+        {/* Dim Overlay - Very subtle */}
         <motion.div 
-          className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/70 to-black/80 md:bg-black/50 z-0"
-          animate={{ opacity: [0.85, 0.95, 0.85] }}
-          transition={{ 
-            duration: 4, 
-            ease: 'easeInOut',
-            repeat: Infinity,
-            repeatType: 'reverse'
-          }}
+          className="absolute inset-0 bg-black/30 md:bg-black/40 z-0"
         />
         {/* Floating Glow Particles */}
         {[...Array(6)].map((_, i) => (
@@ -107,10 +107,6 @@ export default function PhilosophyPage() {
               delay: 0.3,
               ease: [0.25, 0.46, 0.45, 0.94]
             }}
-            whileHover={{
-              scale: 1.05,
-              transition: { duration: 0.3 }
-            }}
             className="font-normal text-white text-xl sm:text-2xl md:text-4xl leading-tight mb-6"
             style={{ 
               opacity: 0.9,
@@ -134,10 +130,6 @@ export default function PhilosophyPage() {
               delay: 0.5,
               ease: 'easeOut'
             }}
-            whileHover={{
-              x: 5,
-              transition: { duration: 0.3 }
-            }}
             className="flex flex-col gap-3"
           >
             <motion.h2 
@@ -146,12 +138,6 @@ export default function PhilosophyPage() {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 0.9, x: 0 }}
               transition={{ duration: 0.6, delay: 0.6 }}
-              whileHover={{
-                scale: 1.05,
-                x: 5,
-                textShadow: '0 2px 10px rgba(255, 255, 255, 0.3)',
-                transition: { duration: 0.3 }
-              }}
             >
               I AM ART
             </motion.h2>
@@ -180,11 +166,6 @@ export default function PhilosophyPage() {
                     delay: 0.7 + index * 0.1,
                     ease: 'easeOut'
                   }}
-                  whileHover={{
-                    x: 5,
-                    opacity: 1,
-                    transition: { duration: 0.2 }
-                  }}
                 >
                   {text}
                 </motion.p>
@@ -205,10 +186,6 @@ export default function PhilosophyPage() {
               delay: 0.7,
               ease: 'easeOut'
             }}
-            whileHover={{
-              x: 5,
-              transition: { duration: 0.3 }
-            }}
             className="flex flex-col gap-3"
           >
             <motion.h2 
@@ -217,12 +194,6 @@ export default function PhilosophyPage() {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 0.9, x: 0 }}
               transition={{ duration: 0.6, delay: 1.4 }}
-              whileHover={{
-                scale: 1.05,
-                x: 5,
-                textShadow: '0 2px 10px rgba(255, 255, 255, 0.3)',
-                transition: { duration: 0.3 }
-              }}
             >
               I AM NATURE
             </motion.h2>
@@ -248,11 +219,6 @@ export default function PhilosophyPage() {
                     duration: 0.6,
                     delay: 1.5 + index * 0.1,
                     ease: 'easeOut'
-                  }}
-                  whileHover={{
-                    x: 5,
-                    opacity: 1,
-                    transition: { duration: 0.2 }
                   }}
                 >
                   {text}

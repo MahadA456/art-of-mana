@@ -1,11 +1,18 @@
 import { useNavigate } from 'react-router-dom'
 import { motion as Motion } from 'framer-motion'
-import choiceImage from '../assets/choice.jpg'
+import { getCloudinaryImage } from '../utils/cloudinary'
 import choicesBack from '../assets/choicesback.png'
 import choicesFront from '../assets/choicesfront.png'
 
 export default function ChoicesPage() {
   const navigate = useNavigate()
+  
+  // Get optimized image from Cloudinary
+  const choiceImage = getCloudinaryImage('choices.png', {
+    width: 1920,
+    quality: 'auto',
+    format: 'auto'
+  })
 
   return (
     <Motion.div 
@@ -36,16 +43,9 @@ export default function ChoicesPage() {
           animate={{ scale: 1 }}
           transition={{ duration: 0.8, ease: 'easeOut' }}
         />
-        {/* Dim Overlay - Mobile: darker, Desktop: lighter */}
+        {/* Dim Overlay - Very subtle */}
         <Motion.div 
-          className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/70 to-black/80 md:bg-black/50 z-0"
-          animate={{ opacity: [1.9, 1.9, 1.9] }}
-          transition={{ 
-            duration: 3, 
-            ease: 'easeInOut',
-            repeat: Infinity,
-            repeatType: 'reverse'
-          }}
+          className="absolute inset-0 bg-black/10 md:bg-black/15 z-0"
         />
       </Motion.div>
 

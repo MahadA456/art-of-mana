@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion as Motion } from 'framer-motion'
-import girlImage from '../assets/girl.png'
+import { getCloudinaryImage } from '../utils/cloudinary'
 import offeringsBg from '../assets/Our Offerings.png'
 
 export default function ContactPage() {
@@ -12,6 +12,13 @@ export default function ContactPage() {
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState({ type: '', text: '' })
   const [imagesLoaded, setImagesLoaded] = useState(false)
+
+  // Get optimized image from Cloudinary
+  const girlImage = getCloudinaryImage('contact.png', {
+    width: 1920,
+    quality: 'auto',
+    format: 'auto'
+  })
 
   // Preload images for better performance
   useEffect(() => {
@@ -34,7 +41,7 @@ export default function ContactPage() {
       setImagesLoaded(true)
     }
     preloadImages()
-  }, [])
+  }, [girlImage])
 
   // Web3Forms configuration - Get your access key from https://web3forms.com
   const WEB3FORMS_ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || ''
@@ -88,11 +95,8 @@ export default function ContactPage() {
           phone: formData.phoneNumber,
           subject: 'New Contact Form Submission - Art of Mana',
           from_name: 'Art of Mana Contact Form',
-          // Auto-reply configuration
-          auto_reply: true,
-          auto_reply_message: `Dear ${formData.fullName},\n\nThank you for contacting Art of Mana - Mana Of Arta!\n\nWe have received your message and will get back to you soon.\n\nTime to Reveal Your True Power.\n\nBest regards,\nMana Of Arta Team`,
-          auto_reply_subject: 'Thank you for contacting Art of Mana',
-        }),
+          // Auto-reply configuration for Web3Forms
+       }),
       })
 
       const data = await response.json()
@@ -139,7 +143,7 @@ export default function ContactPage() {
       >
       {/* Left Image Section - Hidden on mobile */}
       <Motion.div 
-        className="hidden md:block relative w-full md:w-[36%] h-full overflow-hidden"
+        className="hidden md:block relative w-full md:w-[50%] h-full overflow-hidden"
         initial={{ x: -50, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: 'easeOut' }}
@@ -169,7 +173,7 @@ export default function ContactPage() {
 
       {/* Right Section - Contact Form with Offerings Background */}
       <Motion.div 
-        className="relative w-full md:w-[64%] min-h-full md:min-h-full flex items-center justify-center px-5 md:px-10 py-8 bg-cover bg-center bg-no-repeat"
+        className="relative w-full md:w-[50%] min-h-full md:min-h-full flex items-center justify-center px-5 md:px-10 py-8 bg-cover bg-center bg-no-repeat"
         style={{ 
           backgroundImage: imagesLoaded ? `url(${offeringsBg})` : 'none',
           backgroundColor: imagesLoaded ? 'transparent' : '#000',

@@ -1,7 +1,14 @@
-import exploreImage from '../assets/exploree.jpg'
+import { getCloudinaryImage } from '../utils/cloudinary'
 import { motion } from 'framer-motion'
 
 export default function ExplorePage() {
+  // Get optimized image from Cloudinary
+  const exploreImage = getCloudinaryImage('explore.png', {
+    width: 1920,
+    quality: 'auto',
+    format: 'auto'
+  })
+  
   return (
     <motion.div 
       className="w-screen h-screen fixed top-0 left-0 flex flex-col md:flex-row overflow-y-auto m-0 p-0 box-border relative"
