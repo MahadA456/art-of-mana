@@ -22,6 +22,8 @@ function LandingPage() {
     format: 'auto'
   });
 
+  const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' && window.innerWidth < 768);
+
   const handleMenuClick = () => {
     navigate('/menu');
   };
@@ -75,23 +77,35 @@ function LandingPage() {
     preloadImages();
   }, [backMana]);
 
+  // Handle mobile detection
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   useEffect(() => {
     const handleMouseMove = (e) => {
-      mouseX.set(e.clientX / window.innerWidth);
-      mouseY.set(e.clientY / window.innerHeight);
+      if (!isMobile) {
+        mouseX.set(e.clientX / window.innerWidth);
+        mouseY.set(e.clientY / window.innerHeight);
+      }
     };
 
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, [mouseX, mouseY]);
+  }, [mouseX, mouseY, isMobile]);
 
-  // Parallax transforms
+  // Parallax transforms - disabled on mobile
   const backgroundX = useTransform(mouseX, [0, 1], [-20, 20]);
   const backgroundY = useTransform(mouseY, [0, 1], [-20, 20]);
-  const iconX = useTransform(mouseX, [0, 1], [-15, 15]);
-  const iconY = useTransform(mouseY, [0, 1], [-15, 15]);
-  const titleX = useTransform(mouseX, [0, 1], [-10, 10]);
-  const titleY = useTransform(mouseY, [0, 1], [-10, 10]);
+  const iconX = useTransform(mouseX, [0, 1], isMobile ? [0, 0] : [-15, 15]);
+  const iconY = useTransform(mouseY, [0, 1], isMobile ? [0, 0] : [-15, 15]);
+  const titleX = useTransform(mouseX, [0, 1], isMobile ? [0, 0] : [-10, 10]);
+  const titleY = useTransform(mouseY, [0, 1], isMobile ? [0, 0] : [-10, 10]);
 
   return (
     <Motion.div
@@ -173,15 +187,15 @@ function LandingPage() {
       <div className="relative z-10 flex-1 flex flex-col items-center justify-center w-full max-w-full px-4 sm:px-6 md:px-8 lg:px-12 py-6 sm:py-12 md:py-16 lg:py-20 pb-12 sm:pb-12 md:pb-16 lg:pb-20">
         {/* Round Icon with Floating and Glow Animation */}
         <Motion.div
-          style={{
+          style={!isMobile ? {
             x: iconX,
             y: iconY,
-          }}
-          className="relative"
+          } : {}}
+          className="relative flex justify-center items-center w-full"
         >
           {/* Glow Effect */}
           <Motion.div
-            className="absolute inset-0 blur-xl bg-white/20 rounded-full"
+            className="absolute blur-xl bg-white/20 rounded-full pointer-events-none"
             animate={{
               scale: [1, 1.2, 1],
               opacity: [0.3, 0.6, 0.3],
@@ -195,8 +209,9 @@ function LandingPage() {
             style={{
               width: '120%',
               height: '120%',
-              left: '-10%',
-              top: '-10%',
+              left: '50%',
+              top: '50%',
+              transform: 'translate(-50%, -50%)',
             }}
           />
           <Motion.img
@@ -205,7 +220,7 @@ function LandingPage() {
             loading="eager"
             decoding="async"
             fetchPriority="high"
-            className="relative w-[28vw] sm:w-[22vw] md:w-[15vw] lg:w-[12vw] max-w-[160px] sm:max-w-[140px] md:max-w-[150px] lg:max-w-[180px] h-auto mb-2 sm:mb-2 md:mb-4 lg:mb-6 object-contain drop-shadow-2xl"
+            className="relative w-[28vw] sm:w-[22vw] md:w-[15vw] lg:w-[12vw] max-w-[160px] sm:max-w-[140px] md:max-w-[150px] lg:max-w-[180px] h-auto mb-2 sm:mb-2 md:mb-4 lg:mb-6 object-contain drop-shadow-2xl mx-auto"
             initial={{ opacity: 0, scale: 0.5, y: -30, rotate: -180 }}
             animate={{ 
               opacity: imagesLoaded.roundIcon ? 1 : 0, 
@@ -238,10 +253,11 @@ function LandingPage() {
 
         {/* Title Image with Enhanced Slide Up and Parallax */}
         <Motion.div
-          style={{
+          style={!isMobile ? {
             x: titleX,
             y: titleY,
-          }}
+          } : {}}
+          className="relative flex justify-center items-center w-full"
         >
           <Motion.img
             src={titleImage}
@@ -249,7 +265,7 @@ function LandingPage() {
             loading="eager"
             decoding="async"
             fetchPriority="high"
-            className="w-[42vw] sm:w-[45vw] md:w-[40vw] lg:w-[35vw] max-w-[170px] sm:max-w-[220px] md:max-w-[300px] lg:max-w-[360px] h-auto object-contain drop-shadow-2xl"
+            className="w-[42vw] sm:w-[45vw] md:w-[40vw] lg:w-[35vw] max-w-[170px] sm:max-w-[220px] md:max-w-[300px] lg:max-w-[360px] h-auto object-contain drop-shadow-2xl block mx-auto"
             initial={{ opacity: 0, y: 30, scale: 0.9, filter: 'blur(10px)' }}
             animate={{ 
               opacity: imagesLoaded.title ? 1 : 0, 
