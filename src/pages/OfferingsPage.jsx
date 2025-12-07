@@ -132,7 +132,7 @@ export default function OfferingsPage() {
         </motion.div>
 
         {/* Offerings Grid - Below Header */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8 max-w-5xl mx-auto w-full pb-8 sm:pb-4 md:pb-0 items-start">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8 max-w-5xl mx-auto w-full pb-8 sm:pb-4 md:pb-0 items-stretch">
           {[
             {
               title: "Individual Packages (Virtual)",
@@ -171,7 +171,7 @@ export default function OfferingsPage() {
                 {section.title}
               </motion.h2>
 
-              <div className="grid grid-cols-1 gap-3 sm:gap-4 auto-rows-fr">
+              <div className="grid grid-cols-1 gap-3 sm:gap-4 flex-1" style={{ gridTemplateRows: 'repeat(3, 1fr)' }}>
                 {section.items.map((pkg, index) => (
                   <motion.div
                     key={pkg.title}
