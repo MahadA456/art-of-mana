@@ -132,7 +132,7 @@ export default function OfferingsPage() {
         </motion.div>
 
         {/* Offerings Grid - Below Header */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8 max-w-5xl mx-auto w-full pb-8 sm:pb-4 md:pb-0">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8 max-w-5xl mx-auto w-full pb-8 sm:pb-4 md:pb-0 items-start">
           {[
             {
               title: "Individual Packages (Virtual)",
@@ -150,7 +150,7 @@ export default function OfferingsPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: section.delay }}
-              className="flex flex-col gap-3 sm:gap-4"
+              className="flex flex-col gap-3 sm:gap-4 h-full"
             >
               <motion.h2 
                 className="text-lg sm:text-xl md:text-2xl font-semibold underline underline-offset-4 text-left" 
@@ -171,7 +171,7 @@ export default function OfferingsPage() {
                 {section.title}
               </motion.h2>
 
-              <div className="flex flex-col gap-3 sm:gap-4">
+              <div className="grid grid-cols-1 gap-3 sm:gap-4 auto-rows-fr">
                 {section.items.map((pkg, index) => (
                   <motion.div
                     key={pkg.title}
@@ -192,7 +192,7 @@ export default function OfferingsPage() {
                       y: -5,
                       transition: { duration: 0.3 }
                     }}
-                    className={`flex flex-col gap-2 p-3 sm:p-4 md:p-5 rounded-xl border transition-all duration-300 border-[#2b2b2b] md:hover:border-[#00d4aa] ${
+                    className={`flex flex-col gap-2 p-3 sm:p-4 md:p-5 rounded-xl border transition-all duration-300 border-[#2b2b2b] md:hover:border-[#00d4aa] h-full ${
                       pkg.highlighted
                         ? "md:hover:shadow-[0_6px_16px_rgba(0,212,170,0.18)]"
                         : ""
@@ -213,7 +213,7 @@ export default function OfferingsPage() {
                     </motion.div>
 
                     <motion.div 
-                      className="flex flex-col gap-2"
+                      className="flex flex-col gap-2 flex-1"
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.5, delay: 0.7 + index * 0.1 + sectionIndex * 0.15 }}
