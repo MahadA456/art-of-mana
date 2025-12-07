@@ -83,7 +83,7 @@ export default function OfferingsPage() {
       transition={{ duration: 0.8, ease: 'easeOut' }}
     >
       {/* Main Container */}
-      <div className="flex flex-col w-full px-4 sm:px-6 md:px-10 pt-6 pb-4 sm:pt-6 sm:pb-6 md:pt-14 md:pb-14 font-[Calibri] text-white">
+      <div className="flex flex-col w-full px-4 sm:px-6 md:px-10 pt-6 pb-24 sm:pt-6 sm:pb-8 md:pt-14 md:pb-14 font-[Calibri] text-white">
         {/* Header - Above Cards */}
         <motion.div
           initial={{ opacity: 0, y: -30 }}
@@ -132,7 +132,7 @@ export default function OfferingsPage() {
         </motion.div>
 
         {/* Offerings Grid - Below Header */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8 max-w-5xl mx-auto w-full pb-0 sm:pb-0 md:pb-0">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8 max-w-5xl mx-auto w-full pb-8 sm:pb-4 md:pb-0">
           {[
             {
               title: "Individual Packages (Virtual)",

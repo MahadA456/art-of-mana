@@ -90,8 +90,8 @@ function LandingPage() {
   useEffect(() => {
     const handleMouseMove = (e) => {
       if (!isMobile) {
-        mouseX.set(e.clientX / window.innerWidth);
-        mouseY.set(e.clientY / window.innerHeight);
+      mouseX.set(e.clientX / window.innerWidth);
+      mouseY.set(e.clientY / window.innerHeight);
       }
     };
 
